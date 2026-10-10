@@ -68,7 +68,7 @@ window.WEDDING = {
     {
       id: "haldi", name: "Haldi", tagline: "Join us as we bless the couple with love, laughter, and haldi traditions.",
       date: "2026-11-25", start: "11:00",
-      venue: "", address: "",                       // ✎ venue not printed on the Haldi leaf
+      venue: "Green Leaves Farm & Restaurant", address: "Amolik Chowk, Neherpar, Faridabad",
       mapsUrl: "", dress: "Hues of Yellow", tone: "#EFD9A0"
     },
     {
