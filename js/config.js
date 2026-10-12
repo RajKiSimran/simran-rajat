@@ -15,7 +15,7 @@ window.WEDDING = {
 
   /* ---------- Hero ---------- */
   hero: {
-    eyebrow: "Together with their families",
+    eyebrow: "The wedding celebrations of",
     dateLine: "24 – 26 November 2026",
     place: ""
   },

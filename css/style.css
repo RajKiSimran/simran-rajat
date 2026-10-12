@@ -550,3 +550,4 @@ body::after {
 .hero__place:empty { display: none; }
 .hero__date span:not(.rule) { white-space: nowrap; }
 @media (max-width: 400px) { .hero__date { letter-spacing: .2em; gap: .7rem; font-size: .74rem; } .hero__date .rule { width: 18px; } }
+.hero__eyebrow { text-wrap: balance; max-width: 34em; margin-inline: auto; }
