@@ -67,9 +67,9 @@
   <div class="intro" id="intro" aria-hidden="false">
     <div class="intro__panel intro__panel--top"></div>
     <div class="intro__panel intro__panel--bottom"></div>
-    <img class="lotus lotus--left" src="assets/flora/lotus.webp" alt="" width="156" height="206" aria-hidden="true">
-    <img class="lotus lotus--right" src="assets/flora/lotus.webp" alt="" width="156" height="206" aria-hidden="true">
+    <img class="intro__scene" src="assets/flora/cover.webp" alt="" width="960" height="407" aria-hidden="true" fetchpriority="high">
     <div class="intro__inner">
+      <p class="blessing" data-bind="intro.blessing"></p>
       <div class="monogram monogram--lg" aria-hidden="true">
         <svg class="monogram__ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg>
         <span class="monogram__a" data-bind="couple.initials.0"></span>
@@ -263,8 +263,6 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <img class="lotus lotus--left" src="assets/flora/lotus.webp" alt="" width="156" height="206" aria-hidden="true">
-    <img class="lotus lotus--right" src="assets/flora/lotus.webp" alt="" width="156" height="206" aria-hidden="true">
     <div class="monogram" aria-hidden="true">
       <svg class="monogram__ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg>
       <span class="monogram__a" data-bind="couple.initials.0"></span>
@@ -275,6 +273,7 @@
     <p class="footer__tag" data-bind="couple.hashtag"></p>
     <div class="footer__contacts" id="contacts"></div>
     <p class="footer__sign" data-bind="signoff"></p>
+    <img class="footer__scene" src="assets/flora/cover.webp" alt="" width="960" height="407" loading="lazy" decoding="async" aria-hidden="true">
   </footer>
 
   <!-- ============ LIGHTBOX ============ -->

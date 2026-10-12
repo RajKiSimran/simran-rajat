@@ -162,13 +162,18 @@
     const m = M.images['event-' + ev.id];
     const media = h('div', { class: 'event__media', style: `--tone:${ev.tone || ''}`, 'data-reveal-clip': '' },
       m ? picture(m, { sizes: '(min-width: 900px) 46vw, 92vw', alt: ev.name })
-        : h('div', { class: 'event__mark', html: '<svg aria-hidden="true" viewBox="0 0 120 160"><use href="#arch"/></svg>' }, h('span', {}, ev.name))
+        : ev.art
+          ? [h('div', { class: 'event__mark event__mark--art' }, h('span', {}, ev.name)),
+             h('img', { class: 'event__art', src: ev.art, alt: '', loading: 'lazy', decoding: 'async' })]
+          : h('div', { class: 'event__mark', html: '<svg aria-hidden="true" viewBox="0 0 120 160"><use href="#arch"/></svg>' }, h('span', {}, ev.name))
     );
+    if (!m && ev.art) media.classList.add('event__media--art');
     if (m) media.dataset.parallax = '0.06';
     const time = fmtTime(start) + (ev.end ? ` – ${fmtTime(end)}` : ' onwards');
     list.append(h('article', { class: 'event' },
       media,
       h('div', { class: 'event__body', 'data-reveal': '' },
+        ev.symbol ? h('span', { class: `sym sym--${ev.symbol}`, role: 'img', 'aria-label': ev.symbol }) : null,
         h('p', { class: 'event__index' }, `${String(i + 1).padStart(2, '0')} — Day ${dayIndex.indexOf(ev.date) + 1}`),
         h('h3', { class: 'event__name' }, ev.name),
         ev.tagline ? h('p', { class: 'event__tagline' }, ev.tagline) : null,
