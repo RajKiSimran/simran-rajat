@@ -59,7 +59,7 @@ window.WEDDING = {
      date    → "YYYY-MM-DD"     start / end → 24h "HH:MM" (end optional)
      mapsUrl → paste the Google Maps share link. If empty, a Maps search for the address is used.
      art     → the card's illustration for this function (shown until you add an event photo)
-     symbol  → om | swastik | ganesh, shown above the event name, as on the printed card
+     symbol  → om | swastik, a small mark above the illustration, as on the printed card
      tone    → background colour of the card when there's no photo                                */
   events: [
     {
@@ -85,7 +85,7 @@ window.WEDDING = {
     },
     {
       id: "wedding", name: "Wedding", tagline: "",
-      art: "assets/flora/wedding.webp", symbol: "ganesh",
+      art: "assets/flora/wedding.webp",
       date: "2026-11-26", start: "20:00",
       venue: "Amber Resort", address: "Mahipal Green Valley, Surajkund Road, Faridabad",
       mapsUrl: "", dress: "", tone: "#E8B9B1"
