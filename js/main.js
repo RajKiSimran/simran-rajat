@@ -163,14 +163,13 @@
     const media = h('div', { class: 'event__media', style: `--tone:${ev.tone || ''}`, 'data-reveal-clip': '' },
       m ? picture(m, { sizes: '(min-width: 900px) 46vw, 92vw', alt: ev.name })
         : ev.art
-          ? [ev.symbol ? h('span', { class: `sym sym--${ev.symbol}`, role: 'img', 'aria-label': ev.symbol }) : null,
-             h('img', { class: 'event__art', src: ev.art, alt: '', loading: 'lazy', decoding: 'async' })]
+          ? [h('img', { class: 'event__art', src: ev.art, alt: '', loading: 'lazy', decoding: 'async' })]
           : h('div', { class: 'event__mark', html: '<svg aria-hidden="true" viewBox="0 0 120 160"><use href="#arch"/></svg>' }, h('span', {}, ev.name))
     );
     if (!m && ev.art) media.classList.add('event__media--art');
     if (m) media.dataset.parallax = '0.06';
     const time = fmtTime(start) + (ev.end ? ` – ${fmtTime(end)}` : ' onwards');
-    list.append(h('article', { class: 'event' },
+    list.append(h('article', { class: 'event', id: 'event-' + ev.id },
       media,
       h('div', { class: 'event__body', 'data-reveal': '' },
         h('p', { class: 'event__index' }, `${String(i + 1).padStart(2, '0')} — Day ${dayIndex.indexOf(ev.date) + 1}`),

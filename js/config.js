@@ -30,7 +30,6 @@ window.WEDDING = {
   /* ---------- Opening screen (tap to open; also starts the music) ---------- */
   intro: {
     enabled: true,
-    blessing: "Radha Soami Ji",                 // from the printed card
     line: "You are invited to the wedding of",
     button: "Open the invitation"
   },
@@ -59,18 +58,17 @@ window.WEDDING = {
      date    → "YYYY-MM-DD"     start / end → 24h "HH:MM" (end optional)
      mapsUrl → paste the Google Maps share link. If empty, a Maps search for the address is used.
      art     → the card's illustration for this function (shown until you add an event photo)
-     symbol  → om | swastik, a small mark above the illustration, as on the printed card
      tone    → background colour of the card when there's no photo                                */
   events: [
     {
       id: "engagement", name: "Engagement", tagline: "",
-      art: "assets/flora/engagement.webp", symbol: "om",
+      art: "assets/flora/engagement.webp",
       date: "2026-11-24", start: "11:00",
       venue: "Khatir Grace", address: "Near Omaxe World Street, Sector 79, Faridabad",
       mapsUrl: "", dress: "", tone: "#F2CFC9"
     },
     {
-      art: "assets/flora/haldi.webp", symbol: "swastik",
+      art: "assets/flora/haldi.webp",
       id: "haldi", name: "Haldi", tagline: "Join us as we bless the couple with love, laughter, and haldi traditions.",
       date: "2026-11-25", start: "11:00",
       venue: "Green Leaves Farm & Restaurant", address: "Amolik Chowk, Neherpar, Faridabad",
