@@ -529,3 +529,24 @@ body::after {
   .film__frame { clip-path: none; } .film__quote { opacity: 1; transform: none; }
   .statement__text .sw { opacity: 1; }
 }
+
+/* ==========================================================================
+   Floral touches from the printed invitation
+   ========================================================================== */
+.garland { display: block; width: clamp(150px, 40vw, 210px); height: auto; margin: 0 auto; }
+.garland--left { margin: 3rem 0 0; }
+.lotus { position: absolute; bottom: 0; width: clamp(78px, 21vw, 140px); height: auto; pointer-events: none; z-index: 1; }
+.lotus--left  { left: clamp(-14px, -1vw, 0px); }
+.lotus--right { right: clamp(-14px, -1vw, 0px); transform: scaleX(-1); }
+.intro .lotus { opacity: 0; animation: lotusIn 1.6s var(--ease-out) 1.5s forwards; transition: opacity .6s var(--ease); }
+.intro .lotus--right { animation-name: lotusInR; }
+@keyframes lotusIn  { from { opacity: 0; transform: translateY(24px); }              to { opacity: 1; transform: none; } }
+@keyframes lotusInR { from { opacity: 0; transform: translateY(24px) scaleX(-1); }   to { opacity: 1; transform: scaleX(-1); } }
+.intro.is-leaving .lotus { opacity: 0 !important; animation: none; }
+.intro.is-leaving .lotus--right { transform: scaleX(-1); }
+.footer { position: relative; overflow: hidden; }
+.footer .lotus { width: clamp(70px, 16vw, 120px); }
+.hero__date { letter-spacing: .32em; text-transform: uppercase; }
+.hero__place:empty { display: none; }
+.hero__date span:not(.rule) { white-space: nowrap; }
+@media (max-width: 400px) { .hero__date { letter-spacing: .2em; gap: .7rem; font-size: .74rem; } .hero__date .rule { width: 18px; } }

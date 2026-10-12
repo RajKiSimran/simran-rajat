@@ -16,8 +16,8 @@ window.WEDDING = {
   /* ---------- Hero ---------- */
   hero: {
     eyebrow: "Together with their families",
-    dateLine: "24 — 26 · 11 · 2026",
-    place: "Faridabad"
+    dateLine: "24 – 26 November 2026",
+    place: ""
   },
 
   /* Wedding moment used for the countdown (ISO format, with India offset) */
