@@ -30,7 +30,7 @@ window.WEDDING = {
   /* ---------- Opening screen (tap to open; also starts the music) ---------- */
   intro: {
     enabled: true,
-    line: "You are invited",
+    line: "You are invited to the wedding of",
     button: "Open the invitation"
   },
 
