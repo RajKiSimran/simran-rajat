@@ -30,7 +30,7 @@ window.WEDDING = {
   /* ---------- Opening screen (tap to open; also starts the music) ---------- */
   intro: {
     enabled: true,
-    blessing: "॥ श्री गणेशाय नमः ॥",       // shown at the very top of the opening screen (Hindi)
+    blessing: "श्री गणेशाय नमः",       // shown at the very top of the opening screen (Hindi)
     line: "You are invited to the wedding of",
     button: "Open the invitation"
   },

@@ -618,4 +618,8 @@ body::after {
 }
 
 /* blessing line at the top of the opening screen (styled like the card's 'Radha Soami Ji') */
-.intro__blessing { margin: 0 0 1.3rem; font-family: 'Tiro Devanagari Hindi', var(--f-serif); font-weight: 400; font-size: 1.3rem; line-height: 1.6; letter-spacing: .01em; color: var(--gold); opacity: 0; animation: rise 1.2s var(--ease-out) .2s forwards; }
+.intro__blessing { margin: 0 0 1.3rem; font-family: 'Tiro Devanagari Hindi', var(--f-serif); font-weight: 400; font-size: 1.3rem; line-height: 1.6; letter-spacing: .01em; color: rgba(156, 31, 53, .85); opacity: 0; animation: rise 1.2s var(--ease-out) .2s forwards; }
+
+.intro__blessing::before { content: "॥"; margin-right: .45em; }
+.intro__blessing::after { content: "॥"; margin-left: .2em; }
+.intro__blessing:empty { display: none; }
