@@ -545,7 +545,7 @@ body::after {
    Printed-card artwork: Ganpati, couple scenes
    ========================================================================== */
 /* opening screen: the card's first page — couple between lotuses, standing on the bottom edge */
-.intro { --scene-h: min(32vh, calc(min(100vw, 760px) * .515)); }
+.intro { --scene-h: min(32vh, calc(min(100vw, 760px) * .606)); }
 .intro__inner { padding-bottom: calc(var(--scene-h) * .85); }
 .intro__scene {
   position: absolute; left: 50%; bottom: 0; translate: -50% 0; z-index: 1;
@@ -608,7 +608,7 @@ body::after {
 /* ---------- Hero: hanging rose & jasmine sprays in the top corners ---------- */
 .hero__content { position: relative; z-index: 1; }
 .hero__spray {
-  position: absolute; top: 0; z-index: 0; width: min(40vw, 20vh, 330px); height: auto; pointer-events: none;
+  position: absolute; top: 0; z-index: 0; width: min(28vw, 15vh, 230px); height: auto; pointer-events: none;
   opacity: 0; translate: 0 -24px; filter: drop-shadow(0 6px 18px rgba(20, 8, 10, .25));
 }
 .hero__spray--left  { left: -4%; }
@@ -618,6 +618,6 @@ body::after {
 .hero::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 130px; z-index: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(38, 13, 18, .62), rgba(38, 13, 18, 0)); }
 @media (min-width: 900px) {
-  .hero__spray { width: min(19vw, 290px); top: -5vh; }
+  .hero__spray { width: min(13vw, 200px); top: -3vh; }
   .hero__spray--left { left: -1.5%; } .hero__spray--right { right: -1.5%; }
 }
