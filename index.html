@@ -104,6 +104,8 @@
     <section class="hero" id="top">
       <div class="hero__media" id="heroMedia" data-tone="dark"></div>
       <div class="hero__shade"></div>
+      <img class="hero__lotus hero__lotus--left" src="assets/flora/lotus-group.webp" alt="" width="316" height="329" aria-hidden="true">
+      <img class="hero__lotus hero__lotus--right" src="assets/flora/lotus-group.webp" alt="" width="316" height="329" aria-hidden="true">
       <div class="hero__content">
         <p class="eyebrow hero__eyebrow" data-bind="hero.eyebrow"></p>
         <h1 class="hero__names">
@@ -135,7 +137,7 @@
     <section class="story section" id="story">
       <div class="container">
         <header class="section-head">
-          <p class="eyebrow" data-reveal><span class="num">01</span> Our Story</p>
+          <p class="eyebrow" data-reveal>Our Story</p>
           <h2 class="title" data-split data-bind="story.title"></h2>
         </header>
 
@@ -172,7 +174,7 @@
     <section class="events section" id="events">
       <div class="container">
         <header class="section-head">
-          <p class="eyebrow" data-reveal><span class="num">02</span> Celebrations</p>
+          <p class="eyebrow" data-reveal>Celebrations</p>
           <h2 class="title" data-split>Events &amp; Venues</h2>
         </header>
         <div class="events__list" id="eventsList"></div>
@@ -184,7 +186,7 @@
       <div class="gallery__sticky">
         <div class="gallery__track" id="galleryTrack">
           <div class="gallery__intro">
-            <p class="eyebrow"><span class="num">03</span> Gallery</p>
+            <p class="eyebrow">Gallery</p>
             <h2 class="title" data-bind="gallery.title"></h2>
             <p class="gallery__sub" data-bind="gallery.intro"></p>
             <p class="gallery__hint"><span class="hint-desktop">Keep scrolling</span><span class="hint-mobile">Tap to view</span> <i>→</i></p>
@@ -198,7 +200,7 @@
     <section class="rsvp section" id="rsvp">
       <div class="container rsvp__grid">
         <div class="rsvp__head">
-          <p class="eyebrow" data-reveal><span class="num">04</span> RSVP</p>
+          <p class="eyebrow" data-reveal>RSVP</p>
           <h2 class="title" data-split>Will you join us?</h2>
           <p class="lead" data-reveal><span id="deadlineLine">Kindly respond by <strong data-bind="rsvp.deadline"></strong>. </span>We can't wait to celebrate with you.</p>
         </div>
@@ -221,22 +223,6 @@
                 <label class="pill"><input type="radio" name="attending" value="No"><span>Regretfully decline</span></label>
               </div>
             </fieldset>
-
-            <div class="when-yes" id="whenYes">
-              <div class="field">
-                <span class="label" id="guestsLabel">Number of guests (including you)</span>
-                <div class="stepper" role="group" aria-labelledby="guestsLabel">
-                  <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
-                  <output id="guestsOut" aria-live="polite">1</output>
-                  <button type="button" data-step="1" aria-label="More guests">+</button>
-                </div>
-                <input type="hidden" name="guests" id="guests" value="1">
-              </div>
-              <fieldset class="field">
-                <legend>Which events will you attend?</legend>
-                <div class="chips" id="rsvpEvents"></div>
-              </fieldset>
-            </div>
 
             <div class="field">
               <label for="f-msg">A note for the couple <span class="opt">(optional)</span></label>

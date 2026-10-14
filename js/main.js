@@ -172,7 +172,7 @@
     list.append(h('article', { class: 'event', id: 'event-' + ev.id },
       media,
       h('div', { class: 'event__body', 'data-reveal': '' },
-        h('p', { class: 'event__index' }, `${String(i + 1).padStart(2, '0')} — Day ${dayIndex.indexOf(ev.date) + 1}`),
+        h('p', { class: 'event__index' }, `Day ${dayIndex.indexOf(ev.date) + 1}`),
         h('h3', { class: 'event__name' }, ev.name),
         ev.tagline ? h('p', { class: 'event__tagline' }, ev.tagline) : null,
         h('dl', { class: 'event__meta' },
@@ -209,10 +209,6 @@
   });
 
   /* ---------------- 7. RSVP events + contacts ---------------- */
-  const chipBox = $('#rsvpEvents');
-  events.forEach(ev => chipBox.append(
-    h('label', { class: 'pill' }, h('input', { type: 'checkbox', name: 'events', value: ev.name }), h('span', {}, ev.name))
-  ));
   const contacts = $('#contacts');
   (C.contacts || []).forEach(c => contacts.append(h('div', { class: 'contact' },
     h('span', {}, c.label),
@@ -487,22 +483,8 @@
 
   /* ---------------- 15. RSVP ---------------- */
   const form = $('#rsvpForm'), errorEl = $('#formError'), submit = $('#rsvpSubmit');
-  const whenYes = $('#whenYes'), guests = $('#guests'), guestsOut = $('#guestsOut');
-  const maxGuests = get(C, 'rsvp.maxGuests') || 6;
   const thanks = $('#thanks');
 
-  function setGuests(n) {
-    n = Math.max(1, Math.min(maxGuests, n));
-    guests.value = n; guestsOut.textContent = n;
-    $('[data-step="-1"]', form).disabled = n <= 1;
-    $('[data-step="1"]', form).disabled = n >= maxGuests;
-  }
-  setGuests(1);
-  $$('[data-step]', form).forEach(b => b.addEventListener('click', () => setGuests(+guests.value + +b.dataset.step)));
-  $$('input[name="attending"]', form).forEach(r => r.addEventListener('change', () => {
-    whenYes.hidden = form.attending.value !== 'Yes';
-    layout();
-  }));
 
   function fail(msg, field) {
     errorEl.textContent = msg;
@@ -527,11 +509,9 @@
     const name = form.name.value.trim();
     const phone = form.phone.value.trim();
     const attending = form.attending.value;
-    const chosen = $$('input[name="events"]:checked', form).map(c => c.value);
 
     if (name.length < 2) return fail('Please enter your name.', form.name);
     if (phone.replace(/\D/g, '').length < 8) return fail('Please enter a valid phone number.', form.phone);
-    if (attending === 'Yes' && events.length && !chosen.length) return fail('Please choose at least one event.');
 
     const endpoint = get(C, 'rsvp.endpoint');
     if (!endpoint) return fail('RSVP isn’t connected yet. (Site owner: add your Google Script URL in js/config.js.)');
@@ -539,8 +519,8 @@
 
     const body = new URLSearchParams({
       name, phone, attending,
-      guests: attending === 'Yes' ? guests.value : '0',
-      events: attending === 'Yes' ? chosen.join(', ') : '',
+      guests: attending === 'Yes' ? '1' : '0',
+      events: attending === 'Yes' ? events.map(e => e.name).join(', ') : '',
       message: form.message.value.trim(),
       edition: EDITION,
       source: location.href.split('#')[0],
@@ -563,7 +543,7 @@
   });
 
   $('#rsvpAgain').addEventListener('click', () => {
-    form.reset(); setGuests(1); whenYes.hidden = false;
+    form.reset();
     thanks.hidden = true; form.hidden = false; layout();
   });
 
