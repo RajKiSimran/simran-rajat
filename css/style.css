@@ -545,7 +545,7 @@ body::after {
    Printed-card artwork: Ganpati, couple scenes
    ========================================================================== */
 /* opening screen: the card's first page — couple between lotuses, standing on the bottom edge */
-.intro { --scene-h: min(30vh, calc(min(100vw, 760px) * .424)); }
+.intro { --scene-h: min(32vh, calc(min(100vw, 760px) * .515)); }
 .intro__inner { padding-bottom: calc(var(--scene-h) * .85); }
 .intro__scene {
   position: absolute; left: 50%; bottom: 0; translate: -50% 0; z-index: 1;
@@ -605,12 +605,19 @@ body::after {
   .milestone::after { left: calc(50% - 2.5px); }
 }
 
-/* ---------- Hero: lotus clusters from the card, rising from the bottom corners ---------- */
+/* ---------- Hero: hanging rose & jasmine sprays in the top corners ---------- */
 .hero__content { position: relative; z-index: 1; }
-.hero__lotus {
-  position: absolute; bottom: -2px; z-index: 0; width: clamp(110px, 31vw, 210px); height: auto; pointer-events: none;
-  opacity: 0; translate: 0 30px;
+.hero__spray {
+  position: absolute; top: 0; z-index: 0; width: min(40vw, 20vh, 330px); height: auto; pointer-events: none;
+  opacity: 0; translate: 0 -24px; filter: drop-shadow(0 6px 18px rgba(20, 8, 10, .25));
 }
-.hero__lotus--left { left: -3%; }
-.hero__lotus--right { right: -3%; transform: scaleX(-1); }
-.hero.is-ready .hero__lotus { opacity: .95; translate: 0 0; transition: opacity 1.6s var(--ease) 1.2s, translate 1.8s var(--ease-out) 1.2s; }
+.hero__spray--left  { left: -4%; }
+.hero__spray--right { right: -4%; }
+.hero.is-ready .hero__spray { opacity: 1; translate: 0 0; transition: opacity 1.8s var(--ease) 1s, translate 2s var(--ease-out) 1s; }
+.nav:not(.is-solid) .nav__mark, .nav:not(.is-solid) .nav__cta { text-shadow: 0 1px 10px rgba(30, 10, 14, .55); }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 130px; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(38, 13, 18, .62), rgba(38, 13, 18, 0)); }
+@media (min-width: 900px) {
+  .hero__spray { width: min(19vw, 290px); top: -5vh; }
+  .hero__spray--left { left: -1.5%; } .hero__spray--right { right: -1.5%; }
+}
