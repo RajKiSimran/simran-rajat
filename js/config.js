@@ -109,7 +109,7 @@ window.WEDDING = {
      endpoint → the Google Apps Script "Web app URL" (see docs/RSVP-SETUP.md).
                 Until it's set, the form shows a friendly "not connected yet" message. */
   rsvp: {
-    endpoint: "",                       // ✎ https://script.google.com/macros/s/XXXX/exec
+    endpoint: "https://script.google.com/macros/s/AKfycbwLgEbgZq2xaD8F722t3fFaQFv_v-6Sv8UeDIb8lj3Bqm4BZijc9BMSsgFzNEclwg2_/exec",
     deadline: "",                       // ✎ e.g. "10 November 2026" (sentence hidden while empty)
     maxGuests: 6
   },
