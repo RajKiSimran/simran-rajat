@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261016231556">
+  <link rel="stylesheet" href="css/style.css?v=20261016232840">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -235,11 +235,19 @@
           </form>
 
           <div class="thanks" id="thanks" hidden>
-            <img class="garland" id="thanksGarland" src="assets/flora/garland.webp" alt="" width="640" height="207" aria-hidden="true">
             <figure class="dance" id="thanksDance" hidden>
+              <div class="dance__loading" aria-live="polite">
+                <span class="dance__paws" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="dance__loadtext">Hold on, we&rsquo;re getting our dancing shoes on&hellip;</span>
+              </div>
               <span class="dance__tag dance__tag--l"><span data-bind="couple.first"></span><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M10 1c-3 5 3 9 0 18m-4-4 4 4 4-4"/></svg></span>
               <span class="dance__tag dance__tag--r"><span data-bind="couple.second"></span><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M10 1c3 5-3 9 0 18m-4-4 4 4 4-4"/></svg></span>
               <img class="dance__cats" data-src="assets/flora/dancing-cats.webp" alt="Two kittens doing a happy dance" width="410" height="298">
+            </figure>
+            <figure class="sad" id="thanksSad" hidden>
+              <img class="sad__cat" data-src="assets/flora/crying-cat.webp" alt="A teary-eyed cat" width="467" height="442">
+              <span class="sad__tear sad__tear--l" aria-hidden="true"></span>
+              <span class="sad__tear sad__tear--r" aria-hidden="true"></span>
             </figure>
             <h3 class="thanks__title">Thank you<span id="thanksName"></span></h3>
             <p id="thanksText">Your response has been received.</p>
@@ -271,10 +279,10 @@
     <p class="lightbox__count" id="lightboxCount"></p>
   </div>
 
-  <script src="js/config.js?v=20261016231556"></script>
-  <script src="js/edition.js?v=20261016231556"></script>
-  <script src="assets/media-manifest.js?v=20261016231556"></script>
+  <script src="js/config.js?v=20261016232840"></script>
+  <script src="js/edition.js?v=20261016232840"></script>
+  <script src="assets/media-manifest.js?v=20261016232840"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="js/main.js?v=20261016231556" defer></script>
+  <script src="js/main.js?v=20261016232840" defer></script>
 </body>
 </html>

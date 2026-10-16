@@ -494,17 +494,39 @@
     const f = i.closest('.field'); if (f) f.classList.remove('has-error'); errorEl.textContent = '';
   }));
 
+  /* the thank-you animations: start downloading as soon as the guest reaches the RSVP form,
+     so they're usually ready by the time they press Send; show a playful loader until then */
+  function loadArt(img) {
+    if (!img.getAttribute('src')) img.src = img.dataset.src;
+    return img.complete && img.naturalWidth ? Promise.resolve()
+      : new Promise(res => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); });
+  }
+  function showWhenLoaded(fig, img) {
+    fig.classList.remove('is-ready');
+    loadArt(img).then(() => requestAnimationFrame(() => fig.classList.add('is-ready')));
+  }
+  const preloadArt = () => { loadArt($('.dance__cats')); loadArt($('.sad__cat')); };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { preloadArt(); io.disconnect(); } },
+      { rootMargin: '900px 0px' });
+    io.observe($('#rsvp'));
+  } else preloadArt();
+  form.addEventListener('focusin', preloadArt, { once: true });
+
   function showThanks(name, attending) {
     form.hidden = true; thanks.hidden = false;
-    $('#thanksName').textContent = name ? `, ${name.split(' ')[0]}${attending === 'Yes' ? '!' : ''}` : '';
     const yes = attending === 'Yes';
+    const first = name ? name.split(' ')[0] : '';
+    $('.thanks__title').firstChild.textContent = yes ? 'Thank you' : 'We’ll miss you';
+    $('#thanksName').textContent = first ? `, ${first}${yes ? '!' : ''}` : '';
     $('#thanksText').textContent = yes
       ? 'We’re already doing our happy dance. Can’t wait to celebrate with you!'
-      : 'We will miss you, and we are grateful for your blessings.';
-    // a "yes" gets the two of us dancing; a "no" keeps the gentle flowers
-    const dance = $('#thanksDance'), cats = $('.dance__cats', dance);
-    if (yes && !cats.getAttribute('src')) cats.src = cats.dataset.src;   // load only when needed
-    dance.hidden = !yes; $('#thanksGarland').hidden = yes;
+      : 'Thank you for letting us know. We’re grateful for your love and blessings.';
+    // a "yes" gets the two of us dancing, a "no" gets one very sad cat
+    const dance = $('#thanksDance'), sad = $('#thanksSad');
+    dance.hidden = !yes; sad.hidden = yes;
+    if (yes) showWhenLoaded(dance, $('.dance__cats', dance));
+    else showWhenLoaded(sad, $('.sad__cat', sad));
     layout();
   }
 
