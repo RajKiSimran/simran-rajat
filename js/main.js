@@ -496,10 +496,15 @@
 
   function showThanks(name, attending) {
     form.hidden = true; thanks.hidden = false;
-    $('#thanksName').textContent = name ? `, ${name.split(' ')[0]}` : '';
-    $('#thanksText').textContent = attending === 'Yes'
-      ? 'We have your response and cannot wait to celebrate with you.'
+    $('#thanksName').textContent = name ? `, ${name.split(' ')[0]}${attending === 'Yes' ? '!' : ''}` : '';
+    const yes = attending === 'Yes';
+    $('#thanksText').textContent = yes
+      ? 'We’re already doing our happy dance. Can’t wait to celebrate with you!'
       : 'We will miss you, and we are grateful for your blessings.';
+    // a "yes" gets the two of us dancing; a "no" keeps the gentle flowers
+    const dance = $('#thanksDance'), cats = $('.dance__cats', dance);
+    if (yes && !cats.getAttribute('src')) cats.src = cats.dataset.src;   // load only when needed
+    dance.hidden = !yes; $('#thanksGarland').hidden = yes;
     layout();
   }
 
