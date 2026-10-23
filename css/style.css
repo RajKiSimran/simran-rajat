@@ -664,3 +664,8 @@ body::after {
   80% { opacity: .9; } 100% { opacity: 0; transform: translateY(46px) scale(.9); } }
 .dance + .thanks__title, .sad + .thanks__title { margin-top: .6rem; }
 @media (prefers-reduced-motion: reduce) { .is-ready .dance__tag, .is-ready .sad__cat, .is-ready .sad__tear, .dance__paws i { animation: none; } }
+
+/* ---------- Our Story: the map of our two childhood homes ---------- */
+.story__map { margin: 0; max-width: 520px; justify-self: center; width: 100%; }
+.story__map img { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 24px 60px -24px rgba(63, 67, 30, .35); }
+.story__intro .lead { text-wrap: pretty; }

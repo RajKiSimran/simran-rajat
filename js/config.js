@@ -39,7 +39,7 @@ window.WEDDING = {
   story: {
     title: "How it all began",
     intro:
-      "Two people, one city, and a conversation that never quite ended. What started as a chance hello became late-night calls, shared playlists and a hundred little adventures — and now, the biggest one yet.", // ✎
+      "Less than a kilometre apart for 16 years, and somehow, we never crossed paths. Then an Indian classical music class brought us into the same room, sharing the same sur but never a single word. A single Facebook poke broke the silence, and after days of poking back and forth, it all began. Two school kids who knew nothing about life, we promised never to give up on each other, and through long distances, ghar walon ki daant, and every up and down, we’ve held on for more than 11 years. Now we can’t wait to make it official.",
     milestones: [                                                           // ✎ 2–6 items
       { when: "Year", title: "The first hello",   text: "A line or two about how you met." },
       { when: "Year", title: "Our first journey", text: "A favourite memory together." },

@@ -100,6 +100,7 @@
   [['storyPhoto1', 'couple-01', '(min-width: 900px) 45vw, 88vw'], ['storyPhoto2', 'couple-02', '(min-width: 900px) 22vw, 42vw']]
     .forEach(([id, key, sizes], i) => {
       const fig = $('#' + id);
+      if (!fig) return;
       const m = M.images[key];
       fig.append(m ? picture(m, { sizes, alt: '' }) : placeholder(key));
       fig.dataset.parallax = i ? '-0.08' : '0.06';
