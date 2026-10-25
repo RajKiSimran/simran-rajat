@@ -668,4 +668,4 @@ body::after {
 /* ---------- Our Story: the map of our two childhood homes ---------- */
 .story__map { margin: 0; max-width: 520px; justify-self: center; width: 100%; }
 .story__map img { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 24px 60px -24px rgba(63, 67, 30, .35); }
-.story__intro .lead { text-wrap: pretty; }
+.story__intro .lead { text-wrap: pretty; font-family: "Cormorant Garamond", "Tiro Devanagari Hindi", "Times New Roman", Georgia, serif; }

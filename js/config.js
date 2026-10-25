@@ -39,7 +39,7 @@ window.WEDDING = {
   story: {
     title: "How it all began",
     intro:
-      "Less than a kilometre apart for 16 years, and somehow, we never crossed paths. Then a music class brought us into the same room, sharing the same sur but never a single word. A Facebook poke broke the silence, and after days of poking back and forth, it all began. Two school kids who knew nothing about life, promised to never give up on each other, and through long distances, ghar walon ki daant, and every up and down, we’ve held on for more than 11 years. Now we can’t wait to make it official.",
+      "Less than a kilometre apart till 16 years of age, and somehow, we never crossed paths. Then a music class brought us into the same room, sharing the same सुर but never a single word. A Facebook poke broke the silence, and after days of poking back and forth, it all began. Two school kids who knew nothing about life, promised to never give up on each other, and through long distances, ghar walon ki daant, and every up and down, we’ve held on for more than 11 years. Now we can’t wait to make it official.",
     milestones: [                                                           // ✎ 2–6 items
       { when: "Year", title: "The first hello",   text: "A line or two about how you met." },
       { when: "Year", title: "Our first journey", text: "A favourite memory together." },
