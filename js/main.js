@@ -550,21 +550,28 @@
   function go(k, smooth = true) {
     cur = Math.max(0, Math.min(real.length - 1, k));
     warm(cur); setCount();
-    const left = cur * lbTrack.clientWidth;
+    const sl = slides[cur], left = sl.offsetLeft + sl.offsetWidth / 2 - lbTrack.clientWidth / 2;
+    slides.forEach((x, j) => x.classList.toggle('is-cur', j === cur));
     if (smooth) lbTrack.scrollTo({ left, behavior: 'smooth' }); else lbTrack.scrollLeft = left;
   }
-  let scrollT;
+  let lbStart = 0;
   lbTrack.addEventListener('scroll', () => {
-    const k = Math.round(lbTrack.scrollLeft / Math.max(1, lbTrack.clientWidth));
-    if (k !== cur && k >= 0 && k < real.length) {
+    const mid = lbTrack.scrollLeft + lbTrack.clientWidth / 2;
+    let k = 0, best = Infinity;
+    slides.forEach((x, j) => { const dd = Math.abs(x.offsetLeft + x.offsetWidth / 2 - mid); if (dd < best) { best = dd; k = j; } });
+    if (Math.abs(lbTrack.scrollLeft - lbStart) > 30) lb.classList.add('was-swiped');
+    if (k !== cur) {
       cur = k; warm(cur); setCount();
+      slides.forEach((x, j) => x.classList.toggle('is-cur', j === cur));
       slides.forEach((s, j) => { const v = $('video', s); if (v && j !== cur) v.pause(); });
     }
   }, { passive: true });
   function openLightbox(galleryIndex) {
     if (!real.length) return;
     lb.hidden = false;
+    lb.classList.remove('was-swiped');
     go(real.findIndex(x => x.i === galleryIndex), false);
+    lbStart = lbTrack.scrollLeft;
     requestAnimationFrame(() => lb.classList.add('is-open'));
     if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
   }

@@ -476,7 +476,7 @@ body::after {
 /* ==========================================================================
    Lightbox
    ========================================================================== */
-.lightbox { position: fixed; inset: 0; z-index: 150; background: rgba(12,10,8,.985); opacity: 0; transition: opacity .3s var(--ease); }
+.lightbox { position: fixed; inset: 0; z-index: 150; background: #0E0B0A; opacity: 0; transition: opacity .3s var(--ease); }
 .lightbox[hidden] { display: none; }
 .lightbox.is-open { opacity: 1; }
 .lightbox__stage { width: 100%; height: 100%; display: grid; place-items: center; padding: 4.5rem 0; }
@@ -751,3 +751,20 @@ body::after {
 .lb-slide img, .lb-slide video { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 2px; cursor: default; }
 .lightbox button { z-index: 2; }
 .lightbox__count { z-index: 2; pointer-events: none; }
+
+/* Lightbox on phones: neighbouring photos peek in from the sides, plus a swipe hint */
+.lightbox__hint { display: none; }
+@media (max-width: 899px), (hover: none) {
+  .lightbox__track { padding-inline: 12vw; scroll-padding-inline: 12vw; }
+  .lb-slide { flex: 0 0 76vw; padding: calc(env(safe-area-inset-top) + 4rem) 1.5vw calc(env(safe-area-inset-bottom) + 5rem); }
+  .lb-slide img, .lb-slide video { opacity: .5; transform: scale(.9); transition: opacity .35s var(--ease), transform .45s var(--ease-out); }
+  .lb-slide.is-cur img, .lb-slide.is-cur video { opacity: 1; transform: none; }
+  .lightbox__hint { display: block; position: absolute; z-index: 2; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 3rem);
+    margin: 0; text-align: center; color: rgba(248,244,238,.75); font-size: .68rem; letter-spacing: .32em; text-transform: uppercase;
+    pointer-events: none; transition: opacity .4s var(--ease); }
+  .lightbox__hint i { font-style: normal; display: inline-block; font-size: 1rem; animation: nudgeL 1.6s var(--ease) infinite; }
+  .lightbox__hint i:last-child { animation-name: nudgeR; }
+  .lightbox.was-swiped .lightbox__hint { opacity: 0; }
+}
+@keyframes nudgeL { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+@keyframes nudgeR { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
