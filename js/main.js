@@ -201,8 +201,6 @@
   const at = (date, time) => new Date(`${date}T${time || '00:00'}:00+05:30`);
   const gcal = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 
-  /* Editions: js/edition.js says which invitation version this copy is;
-     config.js → editions says which events that version hides (see docs/EDITIONS.md). */
   const EDITION = (C.editions && C.editions[window.EDITION]) ? window.EDITION : 'full';
   const edition = (C.editions || {})[EDITION] || {};
   const events = (C.events || []).filter(ev =>

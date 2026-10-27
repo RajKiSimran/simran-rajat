@@ -16,7 +16,7 @@ window.WEDDING = {
   /* ---------- Hero ---------- */
   hero: {
     eyebrow: "The wedding celebrations of",
-    dateLine: "24 – 26 November 2026",
+    dateLine: "25 – 26 November 2026",
     place: ""
   },
 
@@ -67,20 +67,6 @@ window.WEDDING = {
      tone    → background colour of the card when there's no photo                                */
   events: [
     {
-      id: "engagement", name: "Engagement", tagline: "",
-      art: "assets/flora/engagement.webp",
-      date: "2026-11-24", start: "11:00",
-      venue: "Khatir Grace", address: "Near Omaxe World Street, Sector 79, Faridabad",
-      mapsUrl: "", dress: "", tone: "#F2CFC9"
-    },
-    {
-      art: "assets/flora/haldi.webp",
-      id: "haldi", name: "Haldi", tagline: "Join us as we bless the couple with love, laughter, and haldi traditions.",
-      date: "2026-11-25", start: "11:00",
-      venue: "Green Leaves Farm & Restaurant", address: "Amolik Chowk, Neherpar, Faridabad",
-      mapsUrl: "", dress: "Hues of Yellow", tone: "#EFD9A0"
-    },
-    {
       art: "assets/flora/sangeet.webp",
       id: "sangeet", name: "Sangeet", tagline: "Get ready to dance to Bollywood beats and make unforgettable memories. Followed by dinner.",
       date: "2026-11-25", start: "18:00",
@@ -96,13 +82,7 @@ window.WEDDING = {
     }
   ],
 
-  /* ---------- Editions (filtered versions of the invitation) ----------
-     Which events each version hides. The active one is set in js/edition.js
-     (tools/build-edition.sh writes it). See docs/EDITIONS.md.                 */
-  editions: {
-    "full":     {},
-    "no-haldi": { exclude: ["haldi"] }
-  },
+  editions: { "simran-25-26": {} },
 
   /* ---------- Gallery ---------- */
   gallery: {
