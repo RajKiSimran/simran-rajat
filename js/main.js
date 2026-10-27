@@ -319,6 +319,7 @@
     const print = $('.print', el);
     return { el, print, spr: $$('.sprinkle', el), tilt: parseFloat(getComputedStyle(print).getPropertyValue('--tilt')) || -2.2 };
   });
+  const gItems = $$('.g-item');
   let horizontal = false, hDist = 0;
   let lastY = 0;
 
@@ -412,6 +413,15 @@
     // timeline line fill
     const tr = tl.getBoundingClientRect();
     if (tr.top < vh && tr.bottom > 0) tl.style.setProperty('--fill', clamp((vh * 0.65 - tr.top) / tr.height).toFixed(4));
+
+    // gallery photos: gentle zoom tied to scroll (settles to normal size as each photo reaches the centre)
+    for (const el of gItems) {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh || r.right < 0 || r.left > innerWidth) continue;
+      const d = horizontal ? (r.left + r.width / 2 - innerWidth / 2) / innerWidth
+                           : (r.top + r.height / 2 - vh / 2) / vh;
+      el.style.setProperty('--gz', (1 + Math.min(1, Math.abs(d) * 1.4) * 0.12).toFixed(4));
+    }
 
     // gallery: vertical scroll drives horizontal track
     if (horizontal) {
@@ -521,47 +531,60 @@
     fontsReady.then(revealHero);
   }
 
-  /* ---------------- 14. Lightbox ---------------- */
-  const lb = $('#lightbox'), stage = $('#lightboxStage'), count = $('#lightboxCount');
+  /* ---------------- 14. Lightbox: a swipeable strip that follows the finger ---------------- */
+  const lb = $('#lightbox'), lbTrack = $('#lightboxTrack'), count = $('#lightboxCount');
   const real = galleryItems.map((it, i) => ({ it, i })).filter(x => x.it.t !== 'ph');
   let cur = 0;
-  function show(idx) {
-    cur = (idx + real.length) % real.length;
-    const { it } = real[cur];
-    stage.innerHTML = '';
-    if (it.t === 'i') stage.append(h('img', { src: largest(it), alt: `Photo ${cur + 1}` }));
-    else { const v = h('video', { src: it.v, poster: it.p, controls: true, autoplay: true, playsinline: true, loop: true }); stage.append(v); }
-    count.textContent = `${cur + 1} / ${real.length}`;
+  real.forEach(({ it }, k) => {
+    const slide = h('div', { class: 'lb-slide' });
+    if (it.t === 'i') slide.append(h('img', { srcset: srcset(it), src: largest(it), alt: `Photo ${k + 1}`, decoding: 'async',
+      sizes: `min(92vw, ${(it.w / it.h * 78).toFixed(1)}vh)`, loading: 'lazy' }));
+    else slide.append(h('video', { src: it.v, poster: it.p, controls: true, playsinline: true, loop: true, preload: 'none' }));
+    lbTrack.append(slide);
+  });
+  const slides = $$('.lb-slide', lbTrack);
+  const setCount = () => { count.textContent = `${cur + 1} / ${real.length}`; };
+  function warm(k) {   // load the photo on screen and its neighbours straight away
+    [k - 1, k, k + 1].forEach(j => { const img = slides[j] && $('img', slides[j]); if (img) img.loading = 'eager'; });
   }
+  function go(k, smooth = true) {
+    cur = Math.max(0, Math.min(real.length - 1, k));
+    warm(cur); setCount();
+    const left = cur * lbTrack.clientWidth;
+    if (smooth) lbTrack.scrollTo({ left, behavior: 'smooth' }); else lbTrack.scrollLeft = left;
+  }
+  let scrollT;
+  lbTrack.addEventListener('scroll', () => {
+    const k = Math.round(lbTrack.scrollLeft / Math.max(1, lbTrack.clientWidth));
+    if (k !== cur && k >= 0 && k < real.length) {
+      cur = k; warm(cur); setCount();
+      slides.forEach((s, j) => { const v = $('video', s); if (v && j !== cur) v.pause(); });
+    }
+  }, { passive: true });
   function openLightbox(galleryIndex) {
     if (!real.length) return;
-    show(real.findIndex(x => x.i === galleryIndex));
     lb.hidden = false;
+    go(real.findIndex(x => x.i === galleryIndex), false);
     requestAnimationFrame(() => lb.classList.add('is-open'));
     if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
   }
   function closeLightbox() {
     lb.classList.remove('is-open');
-    setTimeout(() => { lb.hidden = true; stage.innerHTML = ''; }, 400);
+    slides.forEach(s => { const v = $('video', s); if (v) v.pause(); });
+    setTimeout(() => { lb.hidden = true; }, 300);
     if (lenis) lenis.start(); else document.body.style.overflow = '';
   }
   $('.lightbox__close').addEventListener('click', closeLightbox);
-  $('.lightbox__nav--prev').addEventListener('click', () => show(cur - 1));
-  $('.lightbox__nav--next').addEventListener('click', () => show(cur + 1));
-  lb.addEventListener('click', e => { if (e.target === lb || e.target === stage) closeLightbox(); });
+  $('.lightbox__nav--prev').addEventListener('click', () => go(cur - 1));
+  $('.lightbox__nav--next').addEventListener('click', () => go(cur + 1));
+  lbTrack.addEventListener('click', e => { if (e.target.classList.contains('lb-slide')) closeLightbox(); });
   addEventListener('keydown', e => {
     if (lb.hidden) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') show(cur + 1);
-    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+    if (e.key === 'ArrowLeft') go(cur - 1);
   });
-  let sx = null;
-  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    if (sx == null) return;
-    const dx = e.changedTouches[0].clientX - sx; sx = null;
-    if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
-  });
+  addEventListener('resize', () => { if (!lb.hidden) go(cur, false); });
 
   /* ---------------- 15. RSVP ---------------- */
   const form = $('#rsvpForm'), errorEl = $('#formError'), submit = $('#rsvpSubmit');

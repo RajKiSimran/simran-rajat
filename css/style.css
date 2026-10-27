@@ -382,7 +382,6 @@ body::after {
 }
 .g-item img, .g-item video { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out), opacity .8s var(--ease); }
 .g-item img { opacity: 0; } .g-item img.is-loaded { opacity: 1; }
-.g-item:hover img, .g-item:hover video { transform: scale(1.04); }
 .g-item__badge { position: absolute; left: .6rem; bottom: .6rem; width: 26px; height: 26px; border-radius: 50%; background: rgba(0,0,0,.35); display: grid; place-items: center; font-size: .6rem; }
 .gallery__progress { display: none; }
 
@@ -477,7 +476,7 @@ body::after {
 /* ==========================================================================
    Lightbox
    ========================================================================== */
-.lightbox { position: fixed; inset: 0; z-index: 150; background: rgba(12,10,8,.96); display: grid; place-items: center; opacity: 0; transition: opacity .45s var(--ease); touch-action: pan-y; }
+.lightbox { position: fixed; inset: 0; z-index: 150; background: rgba(12,10,8,.985); opacity: 0; transition: opacity .3s var(--ease); }
 .lightbox[hidden] { display: none; }
 .lightbox.is-open { opacity: 1; }
 .lightbox__stage { width: 100%; height: 100%; display: grid; place-items: center; padding: 4.5rem 0; }
@@ -738,3 +737,17 @@ body::after {
 .gallery:not(.is-horizontal) .gallery__intro { grid-column: 1 / -1; grid-row: 1; }
 .gallery:not(.is-horizontal) .g-item { margin: 0; align-self: start; }
 @media (min-width: 640px) { .gallery:not(.is-horizontal) .gallery__track { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Gallery: scroll-linked zoom (works on phones too) */
+.g-item img, .g-item video { transform: scale(var(--gz, 1)); transition: opacity .8s var(--ease); will-change: transform; }
+.gallery__sub:empty { display: none; }
+
+/* Lightbox: swipeable, snapping strip */
+.lightbox__track { position: absolute; inset: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+  scrollbar-width: none; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.lightbox__track::-webkit-scrollbar { display: none; }
+.lb-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: center; scroll-snap-stop: always; display: grid; place-items: center;
+  padding: calc(env(safe-area-inset-top) + 4rem) 4vw calc(env(safe-area-inset-bottom) + 3.5rem); cursor: zoom-out; }
+.lb-slide img, .lb-slide video { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 2px; cursor: default; }
+.lightbox button { z-index: 2; }
+.lightbox__count { z-index: 2; pointer-events: none; }

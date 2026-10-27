@@ -107,7 +107,7 @@ window.WEDDING = {
   /* ---------- Gallery ---------- */
   gallery: {
     title: "Moments",
-    intro: "A few frames from the story so far."
+    intro: ""
   },
 
   /* ---------- RSVP ----------
