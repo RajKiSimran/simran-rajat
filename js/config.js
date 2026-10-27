@@ -61,8 +61,8 @@ window.WEDDING = {
 
   /* ---------- Film interlude ---------- */
   film: {
-    quote: "Whatever our souls are made of, his and mine are the same.", // ✎
-    attribution: "Emily Brontë"                                          // ✎ or ""
+    quote: "And this is just the beginning…", // ✎
+    attribution: ""                                          // ✎ or ""
   },
 
   /* ---------- Events (from the printed invitation) ----------
