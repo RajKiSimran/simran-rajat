@@ -39,12 +39,23 @@ window.WEDDING = {
   story: {
     title: "How it all began",
     intro:
-      "Less than a kilometre apart till 16 years of age, and somehow, we never crossed paths. Then a music class brought us into the same room, sharing the same सुर but never a single word. A Facebook poke broke the silence, and after days of poking back and forth, it all began. Two school kids who knew nothing about life, promised to never give up on each other, and through long distances, ghar walon ki daant, and every up and down, we’ve held on for more than 11 years. Now we can’t wait to make it official ❤️",
-    milestones: [                                                           // ✎ 2–6 items
-      { when: "Year", title: "The first hello",   text: "A line or two about how you met." },
-      { when: "Year", title: "Our first journey", text: "A favourite memory together." },
-      { when: "Year", title: "The question",      text: "How the proposal happened." },
-      { when: "2026", title: "Forever begins",    text: "And now we want to celebrate it with the people who made us who we are — you." }
+      "Less than a kilometre apart till 16 years of age, and somehow, we never crossed paths. Then a music class brought us into the same room, sharing the same सुर but never a single word.",
+    milestones: [                                                           // ✎ photo: optional, files in assets/story/<name>-480.webp and -800.webp (4:5)
+      { when: "2015", title: "The first hello",
+        text: "A Facebook poke broke the silence, and after days of poking back and forth, it all began. On 16th May 2015, two school kids who knew nothing about life promised to never give up on each other." },
+      { when: "2017 – 2020", title: "Long distance, chapter one",
+        text: "Rajat left for college, and love moved to late-night phone calls and counting the days till the next holiday home. Through the miles, ghar walon ki daant, and every up and down, we held on." },
+      { when: "2020", title: "Together, finally… or so we thought",
+        text: "The miles finally disappeared, and everything we had waited for was just a short drive away. We were sure the hardest part was behind us." },
+      { when: "2023 – 2025", title: "Long distance, chapter two",
+        text: "Then Simran moved to Bangalore. Back to video calls that ran past midnight, falling asleep on call, and missing each other in two different cities. Until the day Rajat waited at arrivals with a sign, and this time, she was home for good.",
+        photo: { s: "assets/story/arrival", w: 800, h: 1000, caption: "Long distance, finally over", alt: "Rajat at the airport arrivals gate holding a sign that reads VIP Arrival: Simran Nagpal, Simran beside him with a bouquet." } },
+      { when: "11 January 2026", title: "The question",
+        text: "Candles, roses, a sky full of sparklers and one glowing question. Rajat went down on one knee, and she said yes!!",
+        photo: { s: "assets/story/proposal", w: 800, h: 1000, caption: "She said yes!", alt: "Rajat on one knee holding out a ring to Simran under a floral arch and a neon sign reading Will you marry me?" } },
+      { when: "2026", title: "Forever begins",
+        text: "More than 11 years, two long distances and countless calls later, we can’t wait to make it official. And now we want to celebrate it with the people who made us who we are — you ❤️",
+        photo: { s: "assets/story/forever", w: 800, h: 1000, caption: "Just the beginning", alt: "Simran and Rajat walking hand in hand down a red earth path, Simran looking back and smiling with sunflowers raised." } }
     ]
   },
 

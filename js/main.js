@@ -112,8 +112,13 @@
   (get(C, 'story.milestones') || []).forEach((ms, i) => {
     const key = 'timeline-' + String(i + 1).padStart(2, '0');
     const m = M.images[key];
-    const li = h('li', { class: 'milestone' },
-      m ? h('figure', { class: 'milestone__img', 'data-reveal-clip': '' }, picture(m, { sizes: '(min-width: 900px) 34vw, 80vw' })) : null,
+    const p = ms.photo;
+    const li = h('li', { class: 'milestone' + (p ? ' has-print' : '') },
+      p ? h('figure', { class: 'milestone__img milestone__print', 'data-reveal': '' },
+            h('div', { class: 'print' },
+              picture({ s: p.s, w: p.w, h: p.h, sizes: [480, 800] }, { sizes: '(min-width: 900px) 340px, 72vw', alt: p.alt || '' }),
+              p.caption ? h('figcaption', {}, p.caption) : null))
+        : m ? h('figure', { class: 'milestone__img', 'data-reveal-clip': '' }, picture(m, { sizes: '(min-width: 900px) 34vw, 80vw' })) : null,
       h('div', { class: 'milestone__copy', 'data-reveal': '' },
         h('div', { class: 'milestone__when' }, ms.when),
         h('h3', { class: 'milestone__title' }, ms.title),

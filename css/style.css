@@ -669,3 +669,22 @@ body::after {
 .story__map { margin: 0; max-width: 520px; justify-self: center; width: 100%; }
 .story__map img { display: block; width: 100%; height: auto; border-radius: 22px; box-shadow: 0 24px 60px -24px rgba(63, 67, 30, .35); }
 .story__intro .lead { text-wrap: pretty; font-family: "Cormorant Garamond", "Tiro Devanagari Hindi", "Times New Roman", Georgia, serif; }
+
+/* ---------- Timeline photos: keepsake prints with a strip of rose tape ---------- */
+.milestone__print { aspect-ratio: auto; overflow: visible; background: none; border-radius: 0; max-width: 340px; width: 72%; margin: .4rem 0 .6rem; }
+.js .milestone__print { clip-path: none !important; }
+.print { position: relative; background: #FFFDF8; padding: 10px 10px 0; border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(63, 67, 30, .08), 0 26px 48px -26px rgba(63, 67, 30, .5);
+  transform: rotate(var(--tilt, -2.2deg)); transition: transform .9s var(--ease-out); }
+.milestone:nth-child(odd) .print { --tilt: 2deg; }
+.print::before { content: ""; position: absolute; left: 50%; top: -12px; width: 86px; height: 24px; transform: translateX(-50%) rotate(-3deg);
+  background: rgba(243, 189, 184, .62); box-shadow: 0 1px 2px rgba(63, 67, 30, .08); }
+.print img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1px; }
+.print figcaption { font-family: var(--f-serif); font-style: italic; font-size: 1.2rem; line-height: 1; color: var(--gold); text-align: center; padding: .85rem 0 1rem; }
+@media (hover: hover) { .print:hover { transform: rotate(0deg) scale(1.02); } }
+@media (max-width: 899px) { .milestone__print { order: 2; } }
+@media (min-width: 900px) {
+  .milestone__print { width: 100%; margin: 0; }
+  .milestone.has-print { padding-bottom: clamp(4rem, 8vw, 6.5rem); align-items: start; }
+  .milestone.has-print .milestone__copy { padding-top: 0; }
+}
