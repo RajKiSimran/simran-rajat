@@ -689,3 +689,7 @@ body::after {
   .milestone.has-print .milestone__copy { padding-top: 0; }
 }
 .milestone__text { font-family: "Jost", "Tiro Devanagari Hindi", "Helvetica Neue", system-ui, -apple-system, sans-serif; }
+/* Film clip: keep the couple in frame on tall phone screens */
+.film__media img, .film__media video { object-position: 44% 50%; }
+/* Film quote sits in the sky, clear of the couple */
+.film__quote { align-self: start; margin-top: max(5.5rem, 11vh); text-shadow: 0 1px 22px rgba(30, 18, 12, .35); }
