@@ -332,6 +332,15 @@
       gallery.style.height = '';
       track.style.transform = '';
     }
+    // stacked gallery (phones/tablets): masonry that keeps the photo order reading left to right
+    const items = $$('.g-item', track);
+    if (!horizontal && items.length) {
+      const colW = items[0].getBoundingClientRect().width, gap = 10, unit = 4;
+      items.forEach(el => {
+        const [w, hh] = el.style.aspectRatio.split('/').map(Number);
+        el.style.gridRowEnd = `span ${Math.ceil((colW * hh / w + gap) / unit)}`;
+      });
+    } else items.forEach(el => { el.style.gridRowEnd = ''; });
     pEls = parallaxEls();
     // story sprinkles: on desktop, move the ones facing the timeline to the photo's open side
     const wide = innerWidth >= 900;

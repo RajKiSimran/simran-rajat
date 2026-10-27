@@ -731,3 +731,10 @@ body::after {
 .story.section { padding-bottom: calc(var(--section) * .5); }
 .events.section { padding-top: calc(var(--section) * .55); }
 .story { background: linear-gradient(to bottom, var(--paper) 0, var(--paper) calc(100% - 9rem), var(--ivory) 100%); }
+
+/* Gallery (stacked layout): masonry grid that keeps the chosen order */
+.gallery:not(.is-horizontal) .gallery__track { columns: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 4px; grid-auto-flow: row dense; column-gap: 10px; }
+.gallery:not(.is-horizontal) .gallery__track { grid-template-rows: auto; }
+.gallery:not(.is-horizontal) .gallery__intro { grid-column: 1 / -1; grid-row: 1; }
+.gallery:not(.is-horizontal) .g-item { margin: 0; align-self: start; }
+@media (min-width: 640px) { .gallery:not(.is-horizontal) .gallery__track { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
