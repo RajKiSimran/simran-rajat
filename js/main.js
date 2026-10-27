@@ -128,19 +128,6 @@
     timeline.append(li);
   });
 
-  /* ---------------- 4. Film ---------------- */
-  const filmMedia = $('#filmMedia');
-  {
-    const still = M.images['film-photo'] || M.images['hero-photo'];
-    if (still) filmMedia.append(picture(still, { sizes: '100vw' }));
-    const fv = M.videos['film-video'];
-    if (fv && !reduced && !saveData) {
-      const v = video(fv, { autoplay: false });
-      filmMedia.append(v);
-      lazyPlay(v);
-    }
-  }
-
   /* ---------------- 5. Events ---------------- */
   const fmtDate = d => new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: TZ }).format(d);
   const fmtTime = d => new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: TZ }).format(d);
@@ -257,7 +244,6 @@
   /* ---------------- 10. Scroll engine ---------------- */
   const hero = $('.hero'), heroContent = $('.hero__content');
   const nav = $('#nav');
-  const film = $('#film'), filmFrame = $('#filmFrame'), filmQuote = $('#filmQuote');
   const tl = $('.timeline__line');
   const gallery = $('#gallery'), bar = $('#galleryBar');
   const parallaxEls = () => $$('[data-parallax]');

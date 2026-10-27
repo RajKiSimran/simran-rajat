@@ -705,3 +705,14 @@ body::after {
 .film__quote { align-self: center; margin: 0; opacity: 1; transform: none; text-shadow: 0 1px 24px rgba(20, 13, 10, .4); }
 @media (max-width: 699px) { .film__sticky { aspect-ratio: 4 / 5; border-radius: 20px; } }
 .film__quote p { text-wrap: balance; }
+
+/* ---------- Our Story closing line, easing into Celebrations ---------- */
+.story { background: linear-gradient(to bottom, var(--paper) 0, var(--paper) calc(100% - 16rem), var(--ivory) 100%); }
+.coda { text-align: center; max-width: 42rem; margin: clamp(5rem, 11vw, 8.5rem) auto 0; }
+.coda__ornament { display: flex; align-items: center; justify-content: center; gap: 1.1rem; margin-bottom: 1.7rem; }
+.coda__ornament span { height: 1px; width: clamp(64px, 14vw, 130px); background: linear-gradient(to right, transparent, rgba(156, 31, 53, .5)); }
+.coda__ornament span:last-child { transform: scaleX(-1); }
+.coda__ornament i { position: relative; width: 22px; height: 22px; background: var(--gold); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'%3E%3Cg id='p'%3E%3Cellipse cx='0' cy='-6.2' rx='3.7' ry='5.6'/%3E%3C/g%3E%3Cuse href='%23p' transform='rotate(72)'/%3E%3Cuse href='%23p' transform='rotate(144)'/%3E%3Cuse href='%23p' transform='rotate(216)'/%3E%3Cuse href='%23p' transform='rotate(288)'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'%3E%3Cg id='p'%3E%3Cellipse cx='0' cy='-6.2' rx='3.7' ry='5.6'/%3E%3C/g%3E%3Cuse href='%23p' transform='rotate(72)'/%3E%3Cuse href='%23p' transform='rotate(144)'/%3E%3Cuse href='%23p' transform='rotate(216)'/%3E%3Cuse href='%23p' transform='rotate(288)'/%3E%3C/svg%3E") center / contain no-repeat; }
+.coda__ornament i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: #E9B44C; }
+.coda__line { margin: 0; font-family: var(--f-serif); font-style: italic; font-weight: 300; font-size: clamp(2.1rem, 5.6vw, 3.7rem); line-height: 1.15; color: var(--ink); text-wrap: balance; }
+.coda__line em { font-style: italic; color: var(--gold); }
