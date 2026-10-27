@@ -688,3 +688,4 @@ body::after {
   .milestone.has-print { padding-bottom: clamp(4rem, 8vw, 6.5rem); align-items: start; }
   .milestone.has-print .milestone__copy { padding-top: 0; }
 }
+.milestone__text { font-family: "Jost", "Tiro Devanagari Hindi", "Helvetica Neue", system-ui, -apple-system, sans-serif; }
