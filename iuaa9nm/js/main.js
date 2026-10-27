@@ -564,8 +564,12 @@
       slides.forEach((s, j) => { const v = $('video', s); if (v && j !== cur) v.pause(); });
     }
   }, { passive: true });
+  // phone back button closes the viewer instead of leaving the site
+  let lbHistory = false;
+  addEventListener('popstate', () => { if (lbHistory) { lbHistory = false; closeLightbox(true); } });
   function openLightbox(galleryIndex) {
     if (!real.length) return;
+    if (!lbHistory) { try { history.pushState({ lightbox: true }, ''); lbHistory = true; } catch (e) {} }
     lb.hidden = false;
     lb.classList.remove('was-swiped');
     go(real.findIndex(x => x.i === galleryIndex), false);
@@ -573,13 +577,15 @@
     requestAnimationFrame(() => lb.classList.add('is-open'));
     if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
   }
-  function closeLightbox() {
+  function closeLightbox(fromBack) {
+    if (lb.hidden) return;
+    if (!fromBack && lbHistory) { lbHistory = false; history.back(); }
     lb.classList.remove('is-open');
     slides.forEach(s => { const v = $('video', s); if (v) v.pause(); });
     setTimeout(() => { lb.hidden = true; }, 300);
     if (lenis) lenis.start(); else document.body.style.overflow = '';
   }
-  $('.lightbox__close').addEventListener('click', closeLightbox);
+  $('.lightbox__close').addEventListener('click', () => closeLightbox());
   $('.lightbox__nav--prev').addEventListener('click', () => go(cur - 1));
   $('.lightbox__nav--next').addEventListener('click', () => go(cur + 1));
   lbTrack.addEventListener('click', e => { if (e.target.classList.contains('lb-slide')) closeLightbox(); });
