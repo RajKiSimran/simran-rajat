@@ -49,13 +49,13 @@ window.WEDDING = {
         text: "Finally, the same city again 🥹. No more countdowns, no more goodbyes, and we were sure the hard part was over." },
       { when: "2023 – 2025", title: "Long distance, the sequel",
         text: "Plot twist: Simran moved to Bangalore ✈️. Back to midnight video calls and missing each other in two cities, until she finally came back home, this time for good 🏡",
-        photo: { s: "assets/story/arrival", w: 800, h: 1000, caption: "Long distance, finally over", alt: "Rajat at the airport arrivals gate holding a sign that reads VIP Arrival: Simran Nagpal, Simran beside him with a bouquet." } },
+        photo: { s: "assets/story/arrival", sprinkle: "travel", w: 800, h: 1000, caption: "Long distance, finally over", alt: "Rajat at the airport arrivals gate holding a sign that reads VIP Arrival: Simran Nagpal, Simran beside him with a bouquet." } },
       { when: "11 January 2026", title: "The question",
         text: "Candles, roses and sparklers lighting up the night ✨. Rajat went down on one knee, and she said yes!! 💍",
-        photo: { s: "assets/story/proposal", w: 800, h: 1000, caption: "She said yes!", alt: "Rajat on one knee holding out a ring to Simran under a floral arch and a neon sign reading Will you marry me?" } },
+        photo: { s: "assets/story/proposal", sprinkle: "sparkle", w: 800, h: 1000, caption: "She said yes!", alt: "Rajat on one knee holding out a ring to Simran under a floral arch and a neon sign reading Will you marry me?" } },
       { when: "2026", title: "Forever begins",
         text: "More than 11 years and two long distances later, we’re finally making it official. And we’d love to celebrate it with the people who made us who we are — you ❤️",
-        photo: { s: "assets/story/forever", w: 800, h: 1000, caption: "Forever & always", alt: "Simran and Rajat walking hand in hand down a red earth path, Simran looking back and smiling with sunflowers raised." } }
+        photo: { s: "assets/story/forever", sprinkle: "sunflower", w: 800, h: 1000, caption: "Us, lately", alt: "Simran and Rajat walking hand in hand down a red earth path, Simran looking back and smiling with sunflowers raised." } }
     ]
   },
 

@@ -108,6 +108,72 @@
       fig.setAttribute('data-reveal-clip', '');
     });
 
+
+  /* ---------------- Story sprinkles (little illustrations that scatter around each photo on scroll) ---------------- */
+  const petalSet = (n, rx, ry, cy, fill, rot0 = 0, op = 1) => Array.from({ length: n }, (_, i) =>
+    `<ellipse cx="0" cy="${cy}" rx="${rx}" ry="${ry}" fill="${fill}" opacity="${op}" transform="rotate(${rot0 + i * 360 / n})"/>`).join('');
+  const SPRITE = {
+    sunflower: `<svg viewBox="-12 -12 24 24">${petalSet(14, 1.9, 4.6, -6.6, '#F2B53A')}${petalSet(14, 1.5, 3.6, -6.2, '#F8CB5A', 12.9, .9)}<circle r="4.4" fill="#7A4A22"/><circle r="3" fill="#94592B"/><circle cx="-1" cy="-1" r=".55" fill="#C88A4E"/><circle cx="1.2" cy=".2" r=".55" fill="#C88A4E"/><circle cx="-.2" cy="1.4" r=".55" fill="#C88A4E"/></svg>`,
+    sparkle: `<svg viewBox="-12 -12 24 24"><path d="M0-11C.9-3.6 3.6-.9 11 0 3.6.9.9 3.6 0 11-.9 3.6-3.6.9-11 0-3.6-.9-.9-3.6 0-11Z" fill="currentColor"/></svg>`,
+    plane: `<svg viewBox="0 0 32 20"><path d="M3.2 4.4h2.4l3.6 3.4H4.6z" fill="#E7A3AE" stroke="#C96F82" stroke-width="1" stroke-linejoin="round"/><path d="M4.4 7.2h18.1c3.6 0 6.5 1.3 6.5 2.8s-2.9 2.8-6.5 2.8H5.6c-1.2 0-2-.8-2-1.9V9c0-1 .4-1.8.8-1.8z" fill="#F6E3E6" stroke="#C96F82" stroke-width="1.1" stroke-linejoin="round"/><path d="M13 12.6l-3.2 5.2h2.6l5.4-5.2z" fill="#E7A3AE" stroke="#C96F82" stroke-width="1" stroke-linejoin="round"/><path d="M14 7.4l-2.4-3.8h2.2l4.4 3.8z" fill="#E7A3AE" stroke="#C96F82" stroke-width="1" stroke-linejoin="round"/><circle cx="17.2" cy="9.6" r=".9" fill="#C96F82"/><circle cx="20" cy="9.6" r=".9" fill="#C96F82"/><circle cx="22.8" cy="9.6" r=".9" fill="#C96F82"/><path d="M26.2 8.6c.9.3 1.5.8 1.6 1.4" stroke="#fff" stroke-width=".9" fill="none" stroke-linecap="round"/></svg>`,
+    carnation: `<svg viewBox="-12 -12 24 24">${petalSet(8, 3.6, 5.6, -5, '#F4B7C9')}${petalSet(8, 2.8, 4, -3.6, '#EC98B2', 22.5)}<circle r="2.4" fill="#E07F9E"/></svg>`,
+    lilac: `<svg viewBox="-12 -12 24 24">${petalSet(5, 4.2, 5.4, -5.4, '#CDB8EC')}${petalSet(5, 1.4, 2.6, -4.4, '#9F85D1', 0, .55)}<circle r="2.6" fill="#F4D27A"/></svg>`,
+    blossom: `<svg viewBox="-12 -12 24 24">${petalSet(5, 4.2, 5.4, -5.4, '#F6C3CF')}${petalSet(5, 1.4, 2.6, -4.4, '#E58FA7', 0, .55)}<circle r="2.6" fill="#F7D88A"/></svg>`,
+    leaf: `<svg viewBox="-12 -12 24 24"><path d="M-9 9C-9-3-2-9 9-9 9 3 2 9-9 9Z" fill="#9DB06A"/><path d="M-8 8 7-7" stroke="#7E9450" stroke-width="1" stroke-linecap="round"/></svg>`
+  };
+  //            sprite      x%    y%   size  rot  delay parallax  [colour]
+  const SPRINKLES = {
+    travel: [
+      ['plane',     -18,  12,  46, -14, .00, 26],
+      ['carnation', -12,  44,  30,  10, .08, 14],
+      ['lilac',     112,   8,  28,   0, .04, 20],
+      ['blossom',   -6,   26,  18,  40, .16, 22],
+      ['plane',     112,  60,  40,  12, .14, 30],
+      ['carnation', 114,  34,  20, -20, .20, 12],
+      ['blossom',   106,  90,  26,  20, .24, 12],
+      ['lilac',     -14,  80,  24, -10, .28, 18],
+      ['sunflower',  -4, 102,  20,   0, .34, 10],
+      ['lilac',      60, 108,  18,  30, .38, 16]
+    ],
+    sparkle: [
+      ['sparkle', -14,   8, 30, 0, .00, 22, '#E9B44C'],
+      ['sparkle',  -6,  28, 16, 0, .10, 14, '#F3BDB8'],
+      ['sparkle', 114,  14, 24, 0, .04, 26, '#E9B44C'],
+      ['sparkle', 104,  -2, 14, 0, .16, 12, '#C96F82'],
+      ['sparkle', 116,  48, 34, 0, .12, 18, '#F3BDB8'],
+      ['sparkle', -12,  58, 24, 0, .20, 24, '#E9B44C'],
+      ['sparkle',  -2,  82, 14, 0, .26, 16, '#C96F82'],
+      ['sparkle', 110,  78, 18, 0, .24, 16, '#E9B44C'],
+      ['sparkle', 104, 100, 26, 0, .30, 20, '#E9B44C'],
+      ['sparkle',  -8, 104, 18, 0, .34, 20, '#F3BDB8'],
+      ['sparkle',  58, 108, 20, 0, .40, 14, '#E9B44C']
+    ],
+    sunflower: [
+      ['sunflower', -16,  10, 40, -10, .00, 24],
+      ['leaf',      -10,  30, 20,  30, .12, 14],
+      ['sunflower', 113,  18, 30,  15, .04, 20],
+      ['sunflower',  -6,  48, 22,  10, .16, 18],
+      ['leaf',      116,  42, 18, -40, .22, 12],
+      ['sunflower', 110,  66, 42,  -6, .10, 16],
+      ['sunflower', -14,  76, 28,   0, .20, 28],
+      ['sunflower', 106,  98, 22,   0, .30, 22],
+      ['leaf',       -2, 100, 18,  60, .32, 12],
+      ['sunflower',  48, 108, 24,  20, .36, 18]
+    ]
+  };
+  function sprinkleLayer(kind) {
+    const set = SPRINKLES[kind]; if (!set) return null;
+    const layer = h('div', { class: 'sprinkles', 'aria-hidden': 'true' });
+    set.forEach(([sp, x, y, size, rot, d, par, col]) => {
+      const el = h('span', { class: 'sprinkle sprinkle--' + sp,
+        style: `left:${x}%;top:${y}%;width:${size}px;height:${sp === 'plane' ? Math.round(size * .625) : size}px;--r:${rot};${col ? 'color:' + col + ';' : ''}--tw:${(1.6 + (x * 7 + y) % 13 / 10).toFixed(2)}s`,
+        html: SPRITE[sp] });
+      el._d = d; el._par = par; el._x = x;
+      layer.append(el);
+    });
+    return layer;
+  }
+
   const timeline = $('#timeline');
   (get(C, 'story.milestones') || []).forEach((ms, i) => {
     const key = 'timeline-' + String(i + 1).padStart(2, '0');
@@ -115,6 +181,7 @@
     const p = ms.photo;
     const li = h('li', { class: 'milestone' + (p ? ' has-print' : '') },
       p ? h('figure', { class: 'milestone__img milestone__print', 'data-reveal': '' },
+            sprinkleLayer(p.sprinkle),
             h('div', { class: 'print' },
               picture({ s: p.s, w: p.w, h: p.h, sizes: [480, 800] }, { sizes: '(min-width: 900px) 340px, 72vw', alt: p.alt || '' }),
               p.caption ? h('figcaption', {}, p.caption) : null))
@@ -248,6 +315,10 @@
   const gallery = $('#gallery'), bar = $('#galleryBar');
   const parallaxEls = () => $$('[data-parallax]');
   let pEls = parallaxEls();
+  const prints = $$('.milestone__print').map(el => {
+    const print = $('.print', el);
+    return { el, print, spr: $$('.sprinkle', el), tilt: parseFloat(getComputedStyle(print).getPropertyValue('--tilt')) || -2.2 };
+  });
   let horizontal = false, hDist = 0;
   let lastY = 0;
 
@@ -262,6 +333,18 @@
       track.style.transform = '';
     }
     pEls = parallaxEls();
+    // story sprinkles: on desktop, move the ones facing the timeline to the photo's open side
+    const wide = innerWidth >= 900;
+    for (const f of prints) {
+      const r = f.el.getBoundingClientRect();
+      const onRight = r.left + r.width / 2 > innerWidth / 2;
+      for (const s of f.spr) {
+        let x = s._x;
+        if (wide && onRight && x < 0) x = 100 - x;
+        else if (wide && !onRight && x > 100) x = 100 - x;
+        s.style.left = x < 0 ? `max(${x}%, -6vw)` : `${x}%`;
+      }
+    }
     update();
   }
 
@@ -302,6 +385,19 @@
       const img = el.querySelector('img');
       if (img) img.style.setProperty('--py', `${offset.toFixed(1)}px`);
       else el.style.setProperty('--py', `${offset.toFixed(1)}px`);
+    }
+
+    // story prints: tilt follows the scroll, sprinkles scatter out as the photo rises into view
+    for (const f of prints) {
+      const r = f.el.getBoundingClientRect();
+      if (r.bottom < -80 || r.top > vh + 80) continue;
+      const c = clamp((r.top + r.height / 2 - vh / 2) / (vh / 2), -1.2, 1.2);
+      f.print.style.setProperty('--rot', `${(f.tilt * c).toFixed(2)}deg`);
+      const sp = clamp((vh * 0.92 - r.top) / (vh * 0.55));
+      for (const s of f.spr) {
+        s.style.setProperty('--k', easeOut(clamp((sp - s._d) / 0.4)).toFixed(3));
+        s.style.setProperty('--dr', `${(c * s._par).toFixed(1)}px`);
+      }
     }
 
     // timeline line fill

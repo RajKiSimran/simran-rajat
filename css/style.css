@@ -675,13 +675,12 @@ body::after {
 .js .milestone__print { clip-path: none !important; }
 .print { position: relative; background: #FFFDF8; padding: 10px 10px 0; border-radius: 2px;
   box-shadow: 0 1px 2px rgba(63, 67, 30, .08), 0 26px 48px -26px rgba(63, 67, 30, .5);
-  transform: rotate(var(--tilt, -2.2deg)); transition: transform .9s var(--ease-out); }
+  transform: rotate(var(--rot, var(--tilt, -2.2deg))); }
 .milestone:nth-child(odd) .print { --tilt: 2deg; }
 .print::before { content: ""; position: absolute; left: 50%; top: -12px; width: 86px; height: 24px; transform: translateX(-50%) rotate(-3deg);
   background: rgba(243, 189, 184, .62); box-shadow: 0 1px 2px rgba(63, 67, 30, .08); }
 .print img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1px; }
 .print figcaption { font-family: var(--f-serif); font-style: italic; font-size: 1.2rem; line-height: 1; color: var(--gold); text-align: center; padding: .85rem 0 1rem; }
-@media (hover: hover) { .print:hover { transform: rotate(0deg) scale(1.02); } }
 @media (max-width: 899px) { .milestone__print { order: 2; } }
 @media (min-width: 900px) {
   .milestone__print { width: 100%; margin: 0; }
@@ -716,3 +715,15 @@ body::after {
 .coda__ornament i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: #E9B44C; }
 .coda__line { margin: 0; font-family: var(--f-serif); font-style: italic; font-weight: 300; font-size: clamp(2.1rem, 5.6vw, 3.7rem); line-height: 1.15; color: var(--ink); text-wrap: balance; }
 .coda__line em { font-style: italic; color: var(--gold); }
+
+/* Sprinkles around the story photos */
+.milestone__print { position: relative; }
+.sprinkles { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.sprinkle { position: absolute; display: block; translate: -50% -50%; opacity: var(--k, 0);
+  transform: translate3d(0, var(--dr, 0px), 0) rotate(calc(var(--r, 0) * 1deg + (1 - var(--k, 0)) * -120deg)) scale(calc(.2 + .8 * var(--k, 0)));
+  filter: drop-shadow(0 2px 3px rgba(63, 67, 30, .14)); will-change: transform, opacity; }
+.sprinkle svg { display: block; width: 100%; height: 100%; }
+.sprinkle--sparkle { filter: drop-shadow(0 0 4px rgba(233, 180, 76, .45)); }
+.sprinkle--sparkle svg { animation: twinkle var(--tw, 2s) ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.55); opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .sprinkle { --k: 1; } .sprinkle--sparkle svg { animation: none; } }
