@@ -55,7 +55,7 @@ window.WEDDING = {
         photo: { s: "assets/story/proposal", w: 800, h: 1000, caption: "She said yes!", alt: "Rajat on one knee holding out a ring to Simran under a floral arch and a neon sign reading Will you marry me?" } },
       { when: "2026", title: "Forever begins",
         text: "More than 11 years and two long distances later, we’re finally making it official. And we’d love to celebrate it with the people who made us who we are — you ❤️",
-        photo: { s: "assets/story/forever", w: 800, h: 1000, caption: "Just the beginning", alt: "Simran and Rajat walking hand in hand down a red earth path, Simran looking back and smiling with sunflowers raised." } }
+        photo: { s: "assets/story/forever", w: 800, h: 1000, caption: "Hand in hand", alt: "Simran and Rajat walking hand in hand down a red earth path, Simran looking back and smiling with sunflowers raised." } }
     ]
   },
 

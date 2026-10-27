@@ -322,21 +322,6 @@
     const tr = tl.getBoundingClientRect();
     if (tr.top < vh && tr.bottom > 0) tl.style.setProperty('--fill', clamp((vh * 0.65 - tr.top) / tr.height).toFixed(4));
 
-    // film: frame expands to full-bleed, then quote appears
-    const fr = film.getBoundingClientRect();
-    if (fr.top < vh && fr.bottom > 0) {
-      const p = clamp(-fr.top / (fr.height - vh));
-      const e = easeOut(clamp(p / 0.5));
-      const inv = 1 - e;
-      filmFrame.style.setProperty('--ci-y', `${(inv * 14).toFixed(2)}%`);
-      filmFrame.style.setProperty('--ci-x', `${(inv * (innerWidth < 700 ? 6 : 10)).toFixed(2)}%`);
-      filmFrame.style.setProperty('--ci-r', `${(inv * 24).toFixed(1)}px`);
-      filmMedia.style.setProperty('--fs', (1.2 - e * 0.2).toFixed(4));
-      const q = clamp((p - 0.42) / 0.22);
-      filmFrame.style.setProperty('--fo', q.toFixed(3));
-      filmQuote.style.setProperty('--qo', q.toFixed(3));
-    }
-
     // gallery: vertical scroll drives horizontal track
     if (horizontal) {
       const gr = gallery.getBoundingClientRect();
