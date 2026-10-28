@@ -67,7 +67,7 @@ window.WEDDING = {
      tone    → background colour of the card when there's no photo                                */
   events: [
     {
-      id: "chowki", name: "Mata Ki Chowki", tagline: "With the divine blessings of Mata Rani, we invite you to an evening full of bhajan, devotion, and togetherness. Followed by dinner.",
+      id: "chowki", name: "Mata Ki Chowki", tagline: "With the divine blessings of Mata Rani, we invite you to an evening full of bhajan, devotion, and togetherness.",
       art: "assets/flora/mata-ki-chowki.webp",
       date: "2026-11-22", start: "19:00",
       venue: "C2-44, BPTP Parklands", address: "Sector 85, Faridabad",
