@@ -768,3 +768,18 @@ body::after {
 }
 @keyframes nudgeL { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
 @keyframes nudgeR { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+
+/* "Leaving so soon?" dialog (back button before RSVP) */
+.leave { position: fixed; inset: 0; z-index: 160; display: grid; place-items: center; padding: var(--gutter);
+  background: rgba(30, 20, 18, .55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; transition: opacity .3s var(--ease); }
+.leave[hidden] { display: none; }
+.leave.is-open { opacity: 1; }
+.leave__card { width: min(380px, 100%); background: var(--paper); border-radius: 22px; padding: 2.2rem 1.8rem 1.4rem; text-align: center;
+  box-shadow: 0 30px 70px -20px rgba(30, 20, 18, .45); transform: translateY(14px) scale(.98); transition: transform .45s var(--ease-out); }
+.leave.is-open .leave__card { transform: none; }
+.leave__mark { height: 54px; width: auto; margin: 0 auto 1rem; }
+.leave__title { font-family: var(--f-serif); font-weight: 400; font-size: 1.9rem; line-height: 1.1; margin: 0 0 .7rem; color: var(--ink); }
+.leave__text { color: var(--ink-2); margin: 0 0 1.6rem; font-size: .95rem; line-height: 1.6; }
+.leave__skip { margin-top: .9rem; background: none; border: 0; color: var(--ink-2); opacity: .75; font: inherit; font-size: .72rem;
+  letter-spacing: .2em; text-transform: uppercase; padding: .6rem 1rem; cursor: pointer; }
+.leave__skip:hover { opacity: 1; }

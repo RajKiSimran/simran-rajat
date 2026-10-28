@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261027235717">
+  <link rel="stylesheet" href="css/style.css?v=20261028000145">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -262,6 +262,16 @@
   </footer>
 
   <!-- ============ LIGHTBOX ============ -->
+  <div class="leave" id="leave" role="dialog" aria-modal="true" aria-labelledby="leaveTitle" hidden>
+    <div class="leave__card">
+      <img class="leave__mark" src="assets/flora/monogram.svg" alt="" width="64" height="64">
+      <h2 class="leave__title" id="leaveTitle">Leaving so soon?</h2>
+      <p class="leave__text">Please RSVP before you go, it only takes a minute and helps us plan for you.</p>
+      <button class="btn btn--solid btn--block" id="leaveRsvp" type="button"><span>RSVP now</span></button>
+      <button class="leave__skip" id="leaveSkip" type="button">Leave anyway</button>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox" data-lenis-prevent hidden>
     <button class="lightbox__close" type="button" aria-label="Close">×</button>
     <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous">‹</button>
@@ -271,10 +281,10 @@
     <p class="lightbox__hint" aria-hidden="true"><i>‹</i> Swipe <i>›</i></p>
   </div>
 
-  <script src="js/config.js?v=20261027235717"></script>
-  <script src="js/edition.js?v=20261027235717"></script>
-  <script src="assets/media-manifest.js?v=20261027235717"></script>
+  <script src="js/config.js?v=20261028000145"></script>
+  <script src="js/edition.js?v=20261028000145"></script>
+  <script src="assets/media-manifest.js?v=20261028000145"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="js/main.js?v=20261027235717" defer></script>
+  <script src="js/main.js?v=20261028000145" defer></script>
 </body>
 </html>

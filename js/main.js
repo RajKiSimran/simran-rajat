@@ -597,6 +597,37 @@
   });
   addEventListener('resize', () => { if (!lb.hidden) go(cur, false); });
 
+  /* ---------------- Leaving without an RSVP: the back button asks once ---------------- */
+  const leave = $('#leave');
+  const rsvpDone = () => { try { return localStorage.getItem('sr-rsvp-done') === '1'; } catch (e) { return false; } };
+  let guardArmed = false, leaving = false;
+  function armGuard() {
+    if (guardArmed || rsvpDone()) return;
+    try { history.pushState({ stay: true }, ''); guardArmed = true; } catch (e) {}
+  }
+  // browsers only honour this after a real tap/click, so arm it on the first interaction
+  ['pointerdown', 'keydown'].forEach(t => addEventListener(t, armGuard, { once: true, capture: true }));
+  addEventListener('popstate', e => {
+    if (!guardArmed || (e.state && (e.state.stay || e.state.lightbox))) return;
+    guardArmed = false;
+    if (leaving || rsvpDone()) { history.back(); return; }
+    leave.hidden = false;
+    requestAnimationFrame(() => leave.classList.add('is-open'));
+    if (lenis) lenis.stop();
+  });
+  function hideLeave() {
+    leave.classList.remove('is-open');
+    setTimeout(() => { leave.hidden = true; }, 300);
+    if (lenis) lenis.start();
+  }
+  $('#leaveRsvp').addEventListener('click', () => {
+    hideLeave(); armGuard();
+    const target = $('#rsvp');
+    if (lenis) lenis.scrollTo(target, { duration: 1.4 }); else target.scrollIntoView({ behavior: 'smooth' });
+  });
+  $('#leaveSkip').addEventListener('click', () => { leaving = true; hideLeave(); history.back(); });
+  leave.addEventListener('click', e => { if (e.target === leave) { hideLeave(); armGuard(); } });
+
   /* ---------------- 15. RSVP ---------------- */
   const form = $('#rsvpForm'), errorEl = $('#formError'), submit = $('#rsvpSubmit');
   const thanks = $('#thanks');
@@ -630,6 +661,7 @@
   form.addEventListener('focusin', preloadArt, { once: true });
 
   function showThanks(name, attending) {
+    try { localStorage.setItem('sr-rsvp-done', '1'); } catch (e) {}
     form.hidden = true; thanks.hidden = false;
     const yes = attending === 'Yes';
     const first = name ? name.split(' ')[0] : '';
