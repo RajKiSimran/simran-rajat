@@ -783,7 +783,3 @@ body::after {
 .leave__skip { margin-top: .9rem; background: none; border: 0; color: var(--ink-2); opacity: .75; font: inherit; font-size: .72rem;
   letter-spacing: .2em; text-transform: uppercase; padding: .6rem 1rem; cursor: pointer; }
 .leave__skip:hover { opacity: 1; }
-.toast { position: fixed; z-index: 170; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 1.6rem); translate: -50% 12px; opacity: 0;
-  background: rgba(30, 20, 18, .88); color: var(--paper); font-size: .82rem; letter-spacing: .02em; padding: .8rem 1.3rem; border-radius: 999px;
-  pointer-events: none; transition: opacity .3s var(--ease), translate .4s var(--ease-out); white-space: nowrap; }
-.toast.is-on { opacity: 1; translate: -50% 0; }
