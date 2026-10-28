@@ -602,11 +602,13 @@
   const rsvpDone = () => { try { return localStorage.getItem('sr-rsvp-done') === '1'; } catch (e) { return false; } };
   let guardArmed = false, leaving = false;
   function armGuard() {
-    if (guardArmed || rsvpDone()) return;
+    if (guardArmed || leaving || rsvpDone()) return;
     try { history.pushState({ stay: true }, ''); guardArmed = true; } catch (e) {}
   }
-  // browsers only honour this after a real tap/click, so arm it on the first interaction
-  ['pointerdown', 'keydown'].forEach(t => addEventListener(t, armGuard, { once: true, capture: true }));
+  // Phones only keep this extra history step if it is added during a completed tap (a "user activation"):
+  // click / keydown count, pointerdown on a touchscreen does not. Keep listening until it's in place.
+  // (taps inside the "Leaving so soon?" box don't count, so "Leave anyway" really leaves)
+  ['click', 'keydown'].forEach(t => addEventListener(t, e => { if (!leave.contains(e.target)) armGuard(); }, { capture: true }));
   addEventListener('popstate', e => {
     if (!guardArmed || (e.state && (e.state.stay || e.state.lightbox))) return;
     guardArmed = false;
