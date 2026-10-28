@@ -625,7 +625,21 @@
     const target = $('#rsvp');
     if (lenis) lenis.scrollTo(target, { duration: 1.4 }); else target.scrollIntoView({ behavior: 'smooth' });
   });
-  $('#leaveSkip').addEventListener('click', () => { leaving = true; hideLeave(); history.back(); });
+  $('#leaveSkip').addEventListener('click', () => {
+    leaving = true; hideLeave();
+    let gone = false;
+    addEventListener('pagehide', () => { gone = true; }, { once: true });
+    history.back();                                   // works when they came from another page
+    setTimeout(() => { if (!gone) { try { window.close(); } catch (e) {} } }, 350);   // works for tabs opened by a link
+    setTimeout(() => { if (!gone && !document.hidden) toast('Tap back once more to leave'); }, 800);
+  });
+  let toastT;
+  function toast(msg) {
+    let t = $('#toast');
+    if (!t) { t = h('div', { id: 'toast', class: 'toast', role: 'status' }); document.body.append(t); }
+    t.textContent = msg; t.classList.add('is-on');
+    clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('is-on'), 3200);
+  }
   leave.addEventListener('click', e => { if (e.target === leave) { hideLeave(); armGuard(); } });
 
   /* ---------------- 15. RSVP ---------------- */
