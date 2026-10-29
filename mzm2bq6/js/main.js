@@ -690,6 +690,47 @@
     if (yes) showWhenLoaded(dance, $('.dance__cats', dance));
     else showWhenLoaded(sad, $('.sad__cat', sad));
     layout();
+    bringThanksIntoView();
+  }
+
+  /* The form is much taller than the thank-you, so after sending, the cats can end up off the screen.
+     Close the phone keyboard, then glide the whole thank-you into view (centred when it fits). Slow phones
+     can stall the glide, and the cats can load a moment later, so it checks again after the glide and once
+     the cats appear — unless the guest has started scrolling by themselves. */
+  function bringThanksIntoView() {
+    const ae = document.activeElement;
+    const keyboardOpen = ae && ae !== document.body && /INPUT|TEXTAREA|SELECT/.test(ae.tagName);
+    if (ae && ae.blur) ae.blur();
+    let moved = false, tries = 0;
+    const userMoved = () => { moved = true; };
+    const events = ['wheel', 'touchstart', 'keydown'];
+    events.forEach(ev => addEventListener(ev, userMoved, { passive: true, once: true }));
+    const targetY = () => {                                              // null = already where it should be
+      const vh = (window.visualViewport && window.visualViewport.height) || innerHeight;
+      const navH = ($('#nav') && $('#nav').offsetHeight) || 0;
+      const r = thanks.getBoundingClientRect();
+      if (r.top >= navH && r.bottom <= vh) return null;                  // already fully on screen
+      const room = vh - navH;
+      const art = thanks.querySelector('figure:not([hidden])') || thanks;
+      const top = r.height <= room
+        ? r.top - navH - (room - r.height) / 2                           // centred in the space below the menu
+        : art.getBoundingClientRect().top - navH - 12;                   // small screens: cats at the top
+      return Math.abs(top) < 4 ? null : Math.max(0, scrollY + top);
+    };
+    const go = () => {
+      if (thanks.hidden || moved || tries > 3) return;
+      const y = targetY(); if (y === null) return;
+      tries++;
+      if (lenis) lenis.scrollTo(y, { duration: 1.1 });
+      else scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
+    };
+    // wait for the keyboard to finish closing on phones, so the screen size is right
+    const wait = keyboardOpen && !finePtr ? 350 : 30;
+    setTimeout(() => requestAnimationFrame(go), wait);
+    setTimeout(go, wait + 1500);                                         // after the glide: finish it if it stalled
+    const img = thanks.querySelector('figure:not([hidden]) img');
+    if (img) loadArt(img).then(() => setTimeout(go, 700));              // once the cats are showing
+    setTimeout(() => events.forEach(ev => removeEventListener(ev, userMoved)), 8000);
   }
 
   /* RSVPs are sent in the background, so the thank-you appears instantly. Each one waits on the phone
