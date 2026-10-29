@@ -692,7 +692,22 @@
     layout();
   }
 
-  form.addEventListener('submit', async e => {
+  /* RSVPs are sent in the background, so the thank-you appears instantly. Each one waits on the phone
+     until it has gone out; anything that couldn't be sent (no signal, page closed too soon) is re-sent
+     the next time the invitation is opened. Every RSVP has an id, so the sheet never records it twice. */
+  const QKEY = 'sr-rsvp-queue';
+  const readQ = () => { try { return JSON.parse(localStorage.getItem(QKEY) || '[]'); } catch (e) { return []; } };
+  const writeQ = q => { try { q.length ? localStorage.setItem(QKEY, JSON.stringify(q)) : localStorage.removeItem(QKEY); } catch (e) {} };
+  function sendRsvp(item) {
+    return fetch(item.endpoint, { method: 'POST', body: new URLSearchParams(item.data), mode: 'no-cors', keepalive: true })
+      .then(() => { writeQ(readQ().filter(x => x.data.rid !== item.data.rid)); })
+      .catch(() => {});   // stays queued; tried again on the next visit or when the phone is back online
+  }
+  const flushQueue = () => readQ().forEach(sendRsvp);
+  flushQueue();
+  addEventListener('online', flushQueue);
+
+  form.addEventListener('submit', e => {
     e.preventDefault();
     errorEl.textContent = '';
     const name = form.name.value.trim();
@@ -706,29 +721,21 @@
     if (!endpoint) return fail('RSVP isn’t connected yet. (Site owner: add your Google Script URL in js/config.js.)');
     if (form.website.value) return showThanks(name, attending); // bot
 
-    const body = new URLSearchParams({
+    const data = {
       name, phone, attending,
       guests: attending === 'Yes' ? '1' : '0',
       events: attending === 'Yes' ? events.map(e => e.name).join(', ') : '',
       message: form.message.value.trim(),
       edition: EDITION,
       source: location.href.split('#')[0],
-      userAgent: navigator.userAgent.slice(0, 180)
-    });
-
-    submit.classList.add('is-loading'); submit.disabled = true;
-    try {
-      const res = await fetch(endpoint, { method: 'POST', body });
-      const data = await res.json().catch(() => ({ ok: res.ok }));
-      if (!data.ok) throw new Error(data.error || 'Server error');
-      showThanks(name, attending);
-    } catch (err) {
-      // Apps Script sometimes blocks reading the reply even though the row was saved.
-      if (err instanceof TypeError && navigator.onLine) showThanks(name, attending);
-      else fail('Something went wrong sending your RSVP. Please check your connection and try again.');
-    } finally {
-      submit.classList.remove('is-loading'); submit.disabled = false;
-    }
+      userAgent: navigator.userAgent.slice(0, 180),
+      rid: Date.now().toString(36) + Math.random().toString(36).slice(2, 8)   // lets the sheet ignore a repeat
+    };
+    // keep it on the phone until it's sent, send it in the background, and thank the guest straight away
+    const item = { endpoint, data };
+    writeQ(readQ().concat(item));
+    sendRsvp(item);
+    showThanks(name, attending);
   });
 
   $('#rsvpAgain').addEventListener('click', () => {
