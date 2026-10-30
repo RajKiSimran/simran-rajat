@@ -71,7 +71,7 @@ window.WEDDING = {
       art: "assets/flora/mata-ki-chowki.webp",
       date: "2026-11-22", start: "19:00",
       venue: "C2-44, BPTP Parklands", address: "Sector 85, Faridabad",
-      mapsUrl: "", dress: "", tone: "#F2D2C4"
+      mapsUrl: "https://maps.app.goo.gl/AaiZ3dYoFozsWUS5A", dress: "", tone: "#F2D2C4"
     },
     {
       id: "engagement", name: "Engagement", tagline: "",
