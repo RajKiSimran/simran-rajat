@@ -223,10 +223,11 @@ body::after {
 }
 
 /* hero entrance (after the intro opens) */
-.js .hero__eyebrow, .js .hero__date, .js .hero__place, .js .hero__amp, .js .scroll-cue { opacity: 0; transform: translateY(16px); }
+.js .hero__eyebrow, .js .hero__date, .js .hero__place, .js .hero__amp, .js .scroll-cue, .js .hero__from, .js .hero__special { opacity: 0; transform: translateY(16px); }
 .js .hero__name > span { transform: translateY(110%); }
 .js .hero__media { transform: scale(1.12); }
-.hero.is-ready .hero__eyebrow, .hero.is-ready .hero__date, .hero.is-ready .hero__place, .hero.is-ready .hero__amp, .hero.is-ready .scroll-cue {
+.hero.is-ready .hero__eyebrow, .hero.is-ready .hero__date, .hero.is-ready .hero__place, .hero.is-ready .hero__amp, .hero.is-ready .scroll-cue,
+.hero.is-ready .hero__from, .hero.is-ready .hero__special {
   opacity: 1; transform: none; transition: opacity 1.4s var(--ease), transform 1.6s var(--ease-out);
 }
 .hero.is-ready .hero__name > span { transform: none; transition: transform 1.6s var(--ease-out); }
@@ -237,6 +238,8 @@ body::after {
 .hero.is-ready .hero__date { transition-delay: .9s; }
 .hero.is-ready .hero__place { transition-delay: 1.05s; }
 .hero.is-ready .scroll-cue { transition-delay: 1.4s; }
+.hero.is-ready .hero__from { transition-delay: .1s; }
+.hero.is-ready .hero__special { transition-delay: 1.15s; }
 .hero.is-ready .hero__media { transform: none; transition: transform 3.2s var(--ease-out); }
 .hero.is-settled .hero__media { transition: none; }
 
@@ -787,3 +790,34 @@ body::after {
   background: rgba(30, 20, 18, .88); color: var(--paper); font-size: .82rem; letter-spacing: .02em; padding: .8rem 1.3rem; border-radius: 999px;
   pointer-events: none; transition: opacity .3s var(--ease), translate .4s var(--ease-out); white-space: nowrap; }
 .toast.is-on { opacity: 1; translate: -50% 0; }
+
+/* ---------- Families' compliments on the opening screen ---------- */
+.hero__from[hidden], .hero__special[hidden] { display: none; }
+.hero__from { margin: 0 0 1.7rem; }
+.hero__fromlabel, .hero__speciallabel { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(248,244,238,.72); margin: 0 0 .7rem; }
+.hero__fromnames { font-family: var(--f-serif); font-size: clamp(1.02rem, 1.6vw, 1.3rem); line-height: 1.35; color: rgba(248,244,238,.94); margin: 0; }
+.hero__fromnames + .hero__fromnames { margin-top: .3rem; }
+.hero__fromnames span { white-space: nowrap; }
+.hero__fromamp { display: block; font-family: var(--f-serif); font-style: italic; color: var(--gold-2); font-size: 1.2rem; line-height: 1; margin: .35rem 0 .25rem; }
+.hero__orn { display: block; color: var(--gold-2); font-size: .7rem; letter-spacing: .6em; padding-left: .6em; margin: 1.2rem 0 0; }
+.hero__from + .hero__eyebrow { margin-bottom: 1rem; }
+.hero__special { margin: 1.6rem 0 0; }
+.hero__speciallabel { margin-bottom: .35rem; }
+.hero__specialnames { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.2rem, 1.8vw, 1.45rem); margin: 0; color: var(--paper); }
+/* phone held sideways (short, wide screen): names on one line and tighter spacing so the whole opening fits */
+@media (orientation: landscape) and (max-height: 520px) {
+  .hero { min-height: 0; padding-top: 3.6rem; }
+  .hero__names { flex-direction: row; gap: .18em; align-items: baseline; font-size: clamp(2.4rem, 7vw, 3.4rem); }
+  .hero__amp { font-size: .55em; }
+  .hero__from { margin-bottom: .7rem; }
+  .hero__fromlabel, .hero__speciallabel { margin-bottom: .25rem; }
+  .hero__fromnames { font-size: .95rem; line-height: 1.25; }
+  .hero__fromnames + .hero__fromnames { margin-top: .1rem; }
+  .hero__fromamp { font-size: 1rem; margin: .1rem 0; }
+  .hero__orn { display: none; }
+  .hero__from + .hero__eyebrow, .hero__eyebrow { margin-bottom: .4rem; }
+  .hero__date { margin-top: .8rem; }
+  .hero__special { margin-top: .7rem; }
+  .hero__specialnames { font-size: 1.1rem; }
+  .scroll-cue { display: none; }
+}

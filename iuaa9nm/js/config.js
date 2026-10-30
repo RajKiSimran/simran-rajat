@@ -15,7 +15,12 @@ window.WEDDING = {
 
   /* ---------- Hero ---------- */
   hero: {
-    eyebrow: "The wedding celebrations of",
+    // ✎ "With best compliments from" (one line per couple), an optional extra name after an "&",
+    //   and an optional "Special invitation from" line under the date. Leave [] / "" to hide.
+    compliments: ["Smt. Meenakshi Nagpal & Shri. Anil Nagpal", "Smt. Ritu Nagpal & Shri. Parveen Nagpal"],
+    complimentsAlso: "Umang Nagpal",
+    specialInvitation: "",
+    eyebrow: "To the wedding celebrations of",
     dateLine: "24 – 26 November 2026",
     place: ""
   },

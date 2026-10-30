@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261030050919">
+  <link rel="stylesheet" href="css/style.css?v=20261030194612">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -105,6 +105,11 @@
       <img class="hero__spray hero__spray--left" src="assets/flora/corner-roses.webp" alt="" width="900" height="911" aria-hidden="true">
       <img class="hero__spray hero__spray--right" src="assets/flora/corner-roses.webp" alt="" width="900" height="911" aria-hidden="true">
       <div class="hero__content">
+        <div class="hero__from" id="heroFrom" hidden>
+          <p class="hero__fromlabel">With best compliments from</p>
+          <div id="heroFromNames"></div>
+          <span class="hero__orn" aria-hidden="true">✦ ✦ ✦</span>
+        </div>
         <p class="eyebrow hero__eyebrow" data-bind="hero.eyebrow"></p>
         <h1 class="hero__names">
           <span class="hero__name"><span data-bind="couple.first"></span></span>
@@ -113,6 +118,10 @@
         </h1>
         <p class="hero__date"><span class="rule"></span><span data-bind="hero.dateLine"></span><span class="rule"></span></p>
         <p class="hero__place" data-bind="hero.place"></p>
+        <div class="hero__special" id="heroSpecial" hidden>
+          <p class="hero__speciallabel">Special invitation from</p>
+          <p class="hero__specialnames" id="heroSpecialNames"></p>
+        </div>
       </div>
       <a class="scroll-cue" href="#invite" aria-label="Scroll down">
         <span>Scroll</span><i></i>
@@ -281,10 +290,10 @@
     <p class="lightbox__hint" aria-hidden="true"><i>‹</i> Swipe <i>›</i></p>
   </div>
 
-  <script src="js/config.js?v=20261030050919"></script>
-  <script src="js/edition.js?v=20261030050919"></script>
-  <script src="assets/media-manifest.js?v=20261030050919"></script>
+  <script src="js/config.js?v=20261030194612"></script>
+  <script src="js/edition.js?v=20261030194612"></script>
+  <script src="assets/media-manifest.js?v=20261030194612"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="js/main.js?v=20261030050919" defer></script>
+  <script src="js/main.js?v=20261030194612" defer></script>
 </body>
 </html>

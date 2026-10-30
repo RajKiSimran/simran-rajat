@@ -70,6 +70,25 @@
     const v = get(C, el.dataset.bind);
     if (v != null) el.textContent = v;
   });
+  /* the families' compliments above the names (each couple stays on one line where it can,
+     breaking at the "&"), and the children's special invitation under the date */
+  (() => {
+    const hc = C.hero || {};
+    const lines = (hc.compliments || []).filter(Boolean);
+    const box = $('#heroFrom'), list = $('#heroFromNames');
+    if (box && list && lines.length) {
+      const line = t => {
+        const p = h('p', { class: 'hero__fromnames' });
+        String(t).split(' & ').forEach((part, i) => { if (i) p.append(' & '); p.append(h('span', {}, part)); });
+        return p;
+      };
+      lines.forEach(t => list.append(line(t)));
+      if (hc.complimentsAlso) list.append(h('span', { class: 'hero__fromamp', 'aria-hidden': 'true' }, '&'), line(hc.complimentsAlso));
+      box.hidden = false;
+    }
+    const sp = $('#heroSpecial');
+    if (sp && hc.specialInvitation) { $('#heroSpecialNames').textContent = hc.specialInvitation; sp.hidden = false; }
+  })();
   $$('[data-split]').forEach(el => {
     const words = el.textContent.trim().split(/\s+/);
     el.setAttribute('aria-label', el.textContent.trim());
