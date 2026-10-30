@@ -20,7 +20,7 @@ window.WEDDING = {
     compliments: ["Smt. Meenakshi Nagpal & Shri. Anil Nagpal", "Smt. Ritu Nagpal & Shri. Parveen Nagpal"],
     complimentsAlso: "Umang Nagpal",
     specialInvitation: "",
-    eyebrow: "To the wedding celebrations of",
+    eyebrow: "Welcome to the wedding celebrations of",
     dateLine: "24 – 26 November 2026",
     place: ""
   },
@@ -80,7 +80,7 @@ window.WEDDING = {
     },
     {
       art: "assets/flora/haldi.webp",
-      id: "haldi", name: "Haldi", tagline: "Join us as we bless the couple with love, laughter, and haldi traditions.",
+      id: "haldi", name: "Haldi", tagline: "Come shower us with haldi, love and laughter.",
       date: "2026-11-25", start: "11:00",
       venue: "Green Leaves Farm & Restaurant", address: "Amolik Chowk, Neherpar, Faridabad",
       mapsUrl: "", dress: "Hues of Yellow", tone: "#EFD9A0"

@@ -20,7 +20,7 @@ window.WEDDING = {
     compliments: ["Smt. Meenakshi Nagpal & Shri. Anil Nagpal", "Smt. Ritu Nagpal & Shri. Parveen Nagpal"],
     complimentsAlso: "Umang Nagpal",
     specialInvitation: "",
-    eyebrow: "To the wedding celebrations of",
+    eyebrow: "Welcome to the wedding celebrations of",
     dateLine: "25 – 26 November 2026",
     place: ""
   },

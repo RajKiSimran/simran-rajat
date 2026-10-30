@@ -20,7 +20,7 @@ window.WEDDING = {
     compliments: ["Smt. Sushma Ahuja & Shri. Anil Kumar Ahuja"],
     complimentsAlso: "",
     specialInvitation: "Stavya & Arika",
-    eyebrow: "To the wedding celebrations of",
+    eyebrow: "Welcome to the wedding celebrations of",
     dateLine: "25 – 26 November 2026",
     place: ""
   },
