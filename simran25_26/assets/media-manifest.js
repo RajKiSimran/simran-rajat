@@ -14,5 +14,5 @@ window.MEDIA = {
     {t:"i",s:"assets/gallery/gallery-11",w:1440,h:2160,sizes:[480,960,1440]},
     {t:"i",s:"assets/gallery/gallery-12",w:1920,h:1280,sizes:[640,1280,1920]}
   ],
-  music: null
+  music: "/simran-rajat/assets/music/wedding-piano.mp3"   // one shared copy for every invite link
 };

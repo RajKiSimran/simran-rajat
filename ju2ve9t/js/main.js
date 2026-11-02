@@ -504,22 +504,30 @@
   /* ---------------- 13. Opening screen + music ---------------- */
   const intro = $('#intro');
   const soundBtn = $('#sound');
-  let audio = null;
+  let audio = null, wantMusic = false;               // wantMusic: the guest hasn't switched the music off
   if (M.music) {
     audio = h('audio', { src: M.music, loop: true, preload: 'none' });
     soundBtn.addEventListener('click', () => {
-      if (audio.paused) { audio.play().catch(() => {}); soundBtn.classList.add('is-on'); }
-      else { audio.pause(); soundBtn.classList.remove('is-on'); }
+      if (audio.paused) {
+        wantMusic = true; soundBtn.classList.add('is-on');
+        audio.play().catch(() => { wantMusic = false; soundBtn.classList.remove('is-on'); });
+      } else { wantMusic = false; audio.pause(); soundBtn.classList.remove('is-on'); }
+    });
+    // pause while the invite isn't on screen (guest switched to WhatsApp, locked the phone…), resume on return
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { if (!audio.paused) audio.pause(); }
+      else if (wantMusic && audio.paused) audio.play().catch(() => {});
     });
   }
   function startMusic() {
     if (!audio) return;
     soundBtn.hidden = false;
     audio.volume = 0;
+    wantMusic = true;
     audio.play().then(() => {
       soundBtn.classList.add('is-on');
       let v = 0; const fade = setInterval(() => { v = Math.min(0.55, v + 0.03); audio.volume = v; if (v >= 0.55) clearInterval(fade); }, 120);
-    }).catch(() => {});
+    }).catch(() => { wantMusic = false; });
   }
 
   const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1500))]);
