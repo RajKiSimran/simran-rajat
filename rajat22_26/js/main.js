@@ -85,6 +85,7 @@
       lines.forEach(t => list.append(line(t)));
       if (hc.complimentsAlso) list.append(h('span', { class: 'hero__fromamp', 'aria-hidden': 'true' }, '&'), line(hc.complimentsAlso));
       box.hidden = false;
+      if (lines.length + (hc.complimentsAlso ? 1 : 0) >= 4) $('.hero').classList.add('hero--tall');   // a longer list sits a little higher
     }
     const sp = $('#heroSpecial');
     if (sp && hc.specialInvitation) { $('#heroSpecialNames').textContent = hc.specialInvitation; sp.hidden = false; }
